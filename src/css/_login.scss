@@ -1,0 +1,26 @@
+.login-status {
+    position: fixed;
+    width: 350px;
+    height: 180px;
+    top: 35%;
+    margin-top: -90px;
+    left: 50%;
+    margin-left: -175px;
+    > input {
+        width: 350px;
+        height: 28px;
+        outline: none;
+        border: solid 1px $border-color;
+        margin: 10px 0px;
+        padding: 2px 5px;
+        &:hover {
+            border: solid 1px $blue-color;
+        }
+    }
+    > a {
+        display: inline-block;
+        padding: 8px 25px;
+        background-color: $blue-color;
+        color: $overall-color;
+    }
+}

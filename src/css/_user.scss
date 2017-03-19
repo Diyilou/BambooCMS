@@ -1,0 +1,95 @@
+.bili-usernav {
+  background-color: $bg-color;
+  border-bottom: solid 1px $blue-color;
+  > li {
+    float: left;
+    > a {
+      color: $blue-color;
+      padding: 5px 10px;
+      font-size: 14px;
+      display: inline-block;
+      &:hover {
+        color: $overall-color;
+        background-color: $blue-color;
+      }
+    }
+  }
+}
+
+.bili-admin {
+  padding: 15px;
+}
+
+.bili-adminadd {
+  > h2 {
+    font-size: 16px;
+    font-weight: 100;
+    color: $blue-color;
+    margin-bottom: 15px;
+  }
+  > h3 {
+    font-size: 14px;
+    margin: 10px 0px;
+    > span {
+      font-size: 14px;
+      width: 80px;
+      display: inline-block;
+      color: $gray-color;
+    }
+    > input {
+      width: 260px;
+      height: 21px;
+      padding: 3px 5px;
+      display: inline-block;
+      outline: 0px;
+      border: solid 1px $bg2-color;
+      &:focus {
+        border: solid 1px $blue-color;
+      }
+    }
+  }
+  > div {
+    margin-top: 15px;
+    > a {
+      color: $overall-color;
+      background-color: $blue-color;
+      padding: 5px 15px;
+      display: inline-block;
+      font-size: 14px;
+    }
+  }
+}
+
+.bili-adminall {
+  > h3 {
+    font-size: 14px;
+    color: $blue-color;
+    margin-bottom: 15px;
+    font-weight: 100;
+    > a {
+      color: $blue-color;
+    }
+  }
+  > table {
+    width: 800px;
+    border: solid $border-color 1px;
+    th {
+      padding: 5px;
+      font-size: 15px;
+      color: $blue-color;
+      border-right: 1px solid $border-color;
+      border-bottom: solid 1px $border-color;
+      font-weight: 100;
+    }
+    td {
+      padding: 5px 8px;
+      border-right: solid 1px $border-color;
+      border-bottom: solid 1px $border-color;
+      > a {
+        color: $blue-color;
+        font-size: 14px;
+      }
+    }
+  }
+
+}

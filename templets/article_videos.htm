@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <?php
+      require_once(dirname(__file__) . '/../route/data.client.php');
+      global $videoData;
+      $client = new Client();
+      $result = $client -> getVideo($aid);
+      $videoData = $result['data'][0];
+      echo "<title>".$videoData['title']."</title>";
+      echo "<meta name='keywords' content='".$videoData['keywords']."' />";
+      echo "<meta name='description' content='".$videoData['description']."' />";
+    ?>
+    <title></title>
+    <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header class="p-header">
+      <nav>
+        <a title="完美像素" href="/"><img src="/public/images/logo.png" alt="完美像素"></a>
+        <ul>
+          <li><a href="/">首页推荐</a></li>
+          <li><a href="/course/">视频教程</a></li>
+          <li><a href="/wallpaper/">精美壁纸</a></li>
+          <li><a href="/tools/">美图工具</a></li>
+          <li><a href="/shop/">像素商城</a></li>
+          <li><a href="/nav/">设计导航</a></li>
+        </ul>
+        <ul>
+          <li><a href=''>注册</a></li>
+          <li><a href=''>登录</a></li>
+          <li><input type='text' placeholder="search"></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="p-banner">
+      <img src="/public/images/writersay.png" />
+    </div>
+    <section class="p-course-article">
+      <div class="p-course-right p-content-description">
+        <?php
+          $title = $videoData['title'];
+          $click = $videoData['title'];
+          $time = $videoData['pubdate'];
+
+          echo "<h1>$title</h1>";
+          echo "<h2><span>类型</span><span>ps</span></h2>";
+          echo "<h2><span>点击</span><span>11</span></h2>";
+          echo "<h2><span>上传时间</span><span>$time</span></h3>"
+        ?>
+      </div>
+      <div class="p-course-left">
+        <?php
+          $body = $videoData['body'];
+          $videoContent = ""; // 视频
+          $contentModel = ""; // 内容
+          if (preg_match_all('/\<iframe.*?iframe\>/', $body, $result)) {
+            $videoContent = $result[0][0];
+          }
+
+          $content = preg_split('/[\r\n]/', $body);
+          for ($i = 1, $len = count($content); $i < $len; $i++) {
+            $contentModel .= "<p>".$content[$i]."</p>";
+          }
+          echo "<div class='p-course-video'>".$videoContent."</div>";
+          echo "<div class='p-course-content'>".$contentModel."</div>";
+        ?>
+      </div>
+    </section>
+    <footer></footer>
+    <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="/public/js/main.js"></script>
+  </body>
+</html>

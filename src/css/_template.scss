@@ -1,0 +1,50 @@
+.bili-template {
+  padding: 15px;
+  > h3 {
+    font-size: 15px;
+    font-weight: 100;
+    margin-bottom: 15px;
+    background-color: $bg-color;
+    padding: 8px;
+    > span {
+      color: $gray-color;
+      display: inline-block;
+      margin-right: 15px;
+    }
+    > a {
+      display: inline-block;
+      color: $overall-color;
+      padding: 5px 15px;
+      background-color: $blue-color;
+      border-radius: 5px;
+    }
+  }
+  table {
+    width: 100%;
+    border: solid 1px $border-color;
+  }
+  th {
+    font-size: 15px;
+    font-weight: 100;
+    color: $gray-color;
+    padding: 8px;
+    border-right: solid 1px $border-color;
+    border-bottom: solid 1px $border-color;
+  }
+  td {
+    font-size: 14px;
+    color: $gray-color;
+    padding: 8px;
+    border-right: 1px solid $border-color;
+    border-bottom: solid 1px $border-color;
+  }
+  thead > tr > th:last-child{
+    border-right: 0px;
+  }
+  tbody > tr > td:last-child {
+    border-right: 0px;
+  }
+  tbody > tr:last-child > td {
+    border-bottom: 0px;
+  }
+}

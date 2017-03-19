@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header class="p-header">
+      <nav>
+        <a title="完美像素" href="/"><img src="/public/images/logo.png" alt="完美像素"></a>
+        <ul>
+          <li><a href="/">首页推荐</a></li>
+          <li><a href="/course/">视频教程</a></li>
+          <li><a href="/wallpaper/">精美壁纸</a></li>
+          <li><a href="/tools/">美图工具</a></li>
+          <li><a href="/shop/">像素商城</a></li>
+          <li><a href="/nav/">设计导航</a></li>
+        </ul>
+        <ul>
+          <li><a href=''>注册</a></li>
+          <li><a href=''>登录</a></li>
+          <li><input type='text' placeholder="search"></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="p-banner">
+      <img src="/public/images/writersay.png" />
+    </div>
+    <section class="p-content p-wallpaper-content">
+      <?php
+        require_once(dirname(__file__) . '/../route/data.client.php');
+        $client = new Client();
+        $result = $client -> getWallPaperColumn();
+        $result = $result['data'];
+        $html = "<aside><ul id='videoColumn'>";
+        $vhtml = "<article><div id='videoList'>";
+        for ($i = 0, $len = count($result); $i < $len; $i++) {
+          $typeid = $result[$i]['id'];
+          $html .= "<li><a data-id='".$result[$i]['id']."' href='javascript:void(0)' title='".$result[$i]['seotitle']."'>".$result[$i]['typename']."</a></li>";
+
+          $result1 = $client -> getWallPaperList((int)$typeid);
+          $result1 = $result1['data'];
+          for ($j = 0, $len1 = count($result1); $j < $len1; $j++) {
+            $litpic = $result1[$j]['litpic'];
+            $title = $result1[$j]['title'];
+            $id = $result1[$j]['id'];
+            $typedir = $result1[$j]['typedir'];
+            $vhtmlShowStatus = 'none';
+            if ($i === 0) {
+              $vhtmlShowStatus = 'block';
+            }
+
+            $vhtml .= "<div style='display:$vhtmlShowStatus;' data-id='$typeid'>";
+              $vhtml .= "<img src='$litpic' />";
+              $vhtml .= "<h3>$title</h3>";
+              $vhtml .= "<a href='/course/$id.html'>show</a>";
+              $vhtml .= "<a href=''>comment</a>";
+              $vhtml .= "<a href=''>share</a>";
+            $vhtml .= "</div>";
+          }
+        }
+
+        echo $html."</ul></aside>";
+        echo $vhtml."</div></article>";
+      ?>
+    </section>
+    <footer></footer>
+    <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="/public/js/main.js"></script>
+  </body>
+</html>
