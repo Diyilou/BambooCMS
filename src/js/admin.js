@@ -22,6 +22,7 @@ import AdminAdd from '../jsx/AdminAdd.jsx';
 import Module from '../jsx/Module.jsx';
 
 import System from '../jsx/System.jsx';
+import SystemBasic from '../jsx/SystemBasic.jsx';
 
 import Template from '../jsx/Template.jsx';
 
@@ -76,6 +77,8 @@ if (userid !== '' && userid != null || !!userid !== false) {
           <Route path='/module' component={Module}>
           </Route>
           <Route path='/system' component={System}>
+            <Route path='/system/basic' component={SystemBasic}>
+            </Route>
           </Route>
           <Route path='/template' component={Template}>
           </Route>
