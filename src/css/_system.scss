@@ -1,0 +1,80 @@
+.bili-system-basic {
+  margin: 15px;
+  > h1 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 100;
+    color: $black-color;
+  }
+  > table {
+    width: 900;
+    border: solid 1px $border-color;
+    th {
+      border-right: 1px $border-color solid;
+      border-bottom: 1px $border-color solid;
+      font-size: 15px;
+      color: $black-color;
+      font-weight: 100;
+      text-align: center;
+      padding: 2px 0px;
+    }
+    > thead {
+      > tr {
+        > th:last-child {
+          border-right: 0px;
+        }
+      }
+    }
+    td {
+      border-right: 1px solid $border-color;
+      border-bottom: solid 1px $border-color;
+      padding: 3px 10px;
+      color: $gray1-color;
+      font-size: 14px;
+      > a {
+        color: $blue-color;
+      }
+    }
+    > tbody > tr >td:nth-child(1) {
+      width: 200px;
+    }
+    > tbody > tr >td:last-child {
+      width: 700px;
+      border-right: 0px;
+      > input {
+        width: 800px;
+        height: 23px;
+        padding: 3px 8px;
+        outline: none;
+        border: solid 1px $border-color;
+        &:focus {
+          border: solid 1px $blue-color;
+        }
+      }
+      > textarea {
+        width: 800px;
+        height: 80px;
+        padding: 3px 8px;
+        outline: none;
+        border: solid 1px $border-color;
+        &:focus {
+          border: solid 1px $blue-color;
+        }
+      }
+    }
+    > tbody > tr:last-child {
+      > td {
+        border-bottom: 0px;
+      }
+    }
+  }
+
+  > a {
+    display: inline-block;
+    padding: 5px 15px;
+    background-color: $blue-color;
+    color: $overall-color;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+}

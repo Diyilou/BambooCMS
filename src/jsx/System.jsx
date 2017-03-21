@@ -18,6 +18,7 @@ class System extends React.Component {
     return (
       <div className='bili-system'>
         <SystemNav />
+        {this.props.children}
       </div>
     )
   }
