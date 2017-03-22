@@ -21,6 +21,7 @@ class Nav extends React.Component {
         <ul>
           <li><a target='_blank' href={this.props.basehost}>网站主页</a></li>
           <li><a onClick={off} href='javascript:void(0)'>注销</a></li>
+          <li><span>{this.props.username}</span></li>
         </ul>
       </nav>
     )
@@ -44,13 +45,37 @@ class App extends React.Component {
   constructor () {
     super();
     this.state = {
-      basicData: {}
+      basicData: {},
+      username: ''
     }
     this.getBasicData = this.getBasicData.bind(this);
+    this.getAmindName = this.getAmindName.bind(this);
   }
 
   componentDidMount () {
     var getBasicData = this.getBasicData;
+    var getAmindName = this.getAmindName;
+
+    var userid = window.localStorage.getItem('biliuserid');
+    $.ajax({
+      url: '/route/data.user.php',
+      method: 'post',
+      data: {tag: 'bili', type: 'getuserfromid', uid: userid},
+        success: function (data) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (parseInt(data.status) == 1) {
+            getAmindName(data.data);
+          } else {
+            alert('获得管理员用户名失败');
+            window.location.href = '/biliadmin/';
+            return;
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+    });
 
     $.ajax({
       url: '/route/data.system.php',
@@ -70,6 +95,14 @@ class App extends React.Component {
     });
   }
 
+  getAmindName (data) {
+    console.log(data);
+    window.localStorage.setItem('biliusername', data.uname);
+    this.setState({
+      username: data.uname
+    });
+  }
+
   getBasicData (data) {
     console.log(data);
     this.setState({
@@ -80,7 +113,7 @@ class App extends React.Component {
   render () {
     return (
       <div className='bili-container'>
-        <Nav basehost={this.state.basicData.basehost} />
+        <Nav basehost={this.state.basicData.basehost} username={this.state.username} />
         <Slide />
         <div className='bili-content'>
           {this.props.children == null ? <Default basicData={this.state.basicData}/> : this.props.children}

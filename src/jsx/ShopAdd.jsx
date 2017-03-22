@@ -28,6 +28,7 @@ class ShopAdd extends React.Component {
   }
 
   componentDidMount () {
+    this.refs.writer.value = window.localStorage.getItem('biliusername');
     var setArticle = this.setArticle;
     var articlecontrols = window.localStorage.getItem('articlecontrols');
     if (articlecontrols != '' && articlecontrols != null) {
@@ -145,19 +146,23 @@ class ShopAdd extends React.Component {
 
     if (columnarticle === '' || columnarticle === null) {
       alert('请选择需要添加文章的栏目');
-      return;
+      event.preventDefault();
+      return false;
     }
     if (this.refs.title.value === '' || this.refs.title.value === null) {
       alert('请填写文章标题');
-      return;
+      event.preventDefault();
+      return false;
     }
     if (this.refs.keywords.value === '' || this.refs.keywords.value === null) {
       alert('请填写关键字');
-      return;
+      event.preventDefault();
+      return false;
     }
     if (this.refs.description.value === '' || this.refs.description.value === null) {
       alert('请填写描述');
-      return;
+      event.preventDefault();
+      return false;
     }
 
     var articletype = [];

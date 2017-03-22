@@ -22,7 +22,7 @@ class Login extends React.Component {
       return;
     }
 
-    console.log(1111);
+    console.log(name);
 
     $.ajax({
         url: '/route/data.user.php',

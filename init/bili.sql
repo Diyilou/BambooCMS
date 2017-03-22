@@ -29,6 +29,7 @@ CREATE TABLE `bili_archives` (
   `typeid` smallint(5) NOT NULL, -- 文章所属栏目
   `flag` char(60) DEFAULT  NULL, -- 文章属性
   `click` mediumint(8) NOT NULL, -- 点击量
+  `vote` mediumint(8) DEFAULT NULL, --
   `channel` mediumint(8) NOT NULL, -- 文章类型
   `title` char(60) NOT NULL, -- 标题
   `shorttitle` char(36) DEFAULT NULL, -- 短标题
@@ -125,6 +126,7 @@ CREATE TABLE `bili_member` (
   `exptime` smallint(6) DEFAULT NULL, -- 更新时间
   `money` mediumint(8) DEFAULT NULL, -- 关键词
   `email` char(50) NOT NULL, -- 标题
+  `address` char(50) DEFAULT NULL, -- 标题
   `phone` char(50) DEFAULT NULL, -- 短标题
   `scores` mediumint(8) DEFAULT NULL, -- 作者
   `face` char(50) DEFAULT NULL, -- 源文件

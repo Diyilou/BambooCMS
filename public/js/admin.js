@@ -12323,15 +12323,18 @@ var AdminAdd = function (_React$Component) {
     value: function addAdmin() {
       if (this.refs.uname.value === null || this.refs.uname.value === '') {
         alert('用户名不能为空');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.pwd.value === null || this.refs.pwd.value === '') {
         alert('密码不能为空');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.email.value === null || this.refs.email.value === '') {
         alert('邮箱不能为空');
-        return;
+        event.preventDefault();
+        return false;
       }
       var userData = {
         usertype: 1, // 普通管理员，如果为0，则是超级管理员
@@ -12389,7 +12392,7 @@ var AdminAdd = function (_React$Component) {
             null,
             '\u5BC6\u7801*'
           ),
-          _react2.default.createElement('input', { ref: 'pwd', type: 'text' })
+          _react2.default.createElement('input', { ref: 'pwd', type: 'password' })
         ),
         _react2.default.createElement(
           'h3',
@@ -12514,6 +12517,15 @@ var Nav = function (_React$Component) {
               { onClick: off, href: 'javascript:void(0)' },
               '\u6CE8\u9500'
             )
+          ),
+          _react2.default.createElement(
+            'li',
+            null,
+            _react2.default.createElement(
+              'span',
+              null,
+              this.props.username
+            )
           )
         )
       );
@@ -12604,9 +12616,11 @@ var App = function (_React$Component3) {
     var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this3.state = {
-      basicData: {}
+      basicData: {},
+      username: ''
     };
     _this3.getBasicData = _this3.getBasicData.bind(_this3);
+    _this3.getAmindName = _this3.getAmindName.bind(_this3);
     return _this3;
   }
 
@@ -12614,6 +12628,28 @@ var App = function (_React$Component3) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var getBasicData = this.getBasicData;
+      var getAmindName = this.getAmindName;
+
+      var userid = window.localStorage.getItem('biliuserid');
+      $.ajax({
+        url: '/route/data.user.php',
+        method: 'post',
+        data: { tag: 'bili', type: 'getuserfromid', uid: userid },
+        success: function success(data) {
+          data = JSON.parse(data);
+          console.log(data);
+          if (parseInt(data.status) == 1) {
+            getAmindName(data.data);
+          } else {
+            alert('获得管理员用户名失败');
+            window.location.href = '/biliadmin/';
+            return;
+          }
+        },
+        error: function error(err) {
+          console.log(err);
+        }
+      });
 
       $.ajax({
         url: '/route/data.system.php',
@@ -12633,6 +12669,15 @@ var App = function (_React$Component3) {
       });
     }
   }, {
+    key: 'getAmindName',
+    value: function getAmindName(data) {
+      console.log(data);
+      window.localStorage.setItem('biliusername', data.uname);
+      this.setState({
+        username: data.uname
+      });
+    }
+  }, {
     key: 'getBasicData',
     value: function getBasicData(data) {
       console.log(data);
@@ -12646,7 +12691,7 @@ var App = function (_React$Component3) {
       return _react2.default.createElement(
         'div',
         { className: 'bili-container' },
-        _react2.default.createElement(Nav, { basehost: this.state.basicData.basehost }),
+        _react2.default.createElement(Nav, { basehost: this.state.basicData.basehost, username: this.state.username }),
         _react2.default.createElement(Slide, null),
         _react2.default.createElement(
           'div',
@@ -13027,6 +13072,8 @@ var ArticleAdd = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+
+      this.refs.writer.value = window.localStorage.getItem('biliusername');
       var setArticle = this.setArticle;
       var articlecontrols = window.localStorage.getItem('articlecontrols');
       if (articlecontrols != '' && articlecontrols != null) {
@@ -13117,19 +13164,23 @@ var ArticleAdd = function (_React$Component) {
 
       if (columnarticle === '' || columnarticle === null) {
         alert('请选择需要添加文章的栏目');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.title.value === '' || this.refs.title.value === null) {
         alert('请填写文章标题');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.keywords.value === '' || this.refs.keywords.value === null) {
         alert('请填写关键字');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.description.value === '' || this.refs.description.value === null) {
         alert('请填写描述');
-        return;
+        event.preventDefault();
+        return false;
       }
 
       var articletype = [];
@@ -14372,7 +14423,7 @@ var Login = function (_React$Component) {
         return;
       }
 
-      console.log(1111);
+      console.log(name);
 
       $.ajax({
         url: '/route/data.user.php',
@@ -14931,6 +14982,7 @@ var PhotoAdd = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.refs.writer.value = window.localStorage.getItem('biliusername');
       var setArticle = this.setArticle;
       var articlecontrols = window.localStorage.getItem('articlecontrols');
       if (articlecontrols != '' && articlecontrols != null) {
@@ -15023,19 +15075,23 @@ var PhotoAdd = function (_React$Component) {
 
       if (columnarticle === '' || columnarticle === null) {
         alert('请选择需要添加文章的栏目');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.title.value === '' || this.refs.title.value === null) {
         alert('请填写文章标题');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.keywords.value === '' || this.refs.keywords.value === null) {
         alert('请填写关键字');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.description.value === '' || this.refs.description.value === null) {
         alert('请填写描述');
-        return;
+        event.preventDefault();
+        return false;
       }
 
       var articletype = [];
@@ -15729,6 +15785,7 @@ var ShopAdd = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.refs.writer.value = window.localStorage.getItem('biliusername');
       var setArticle = this.setArticle;
       var articlecontrols = window.localStorage.getItem('articlecontrols');
       if (articlecontrols != '' && articlecontrols != null) {
@@ -15850,19 +15907,23 @@ var ShopAdd = function (_React$Component) {
 
       if (columnarticle === '' || columnarticle === null) {
         alert('请选择需要添加文章的栏目');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.title.value === '' || this.refs.title.value === null) {
         alert('请填写文章标题');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.keywords.value === '' || this.refs.keywords.value === null) {
         alert('请填写关键字');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.description.value === '' || this.refs.description.value === null) {
         alert('请填写描述');
-        return;
+        event.preventDefault();
+        return false;
       }
 
       var articletype = [];
@@ -17105,6 +17166,7 @@ var VideoAdd = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.refs.writer.value = window.localStorage.getItem('biliusername');
       var setArticle = this.setArticle;
       var articlecontrols = window.localStorage.getItem('articlecontrols');
       if (articlecontrols != '' && articlecontrols != null) {
@@ -17195,19 +17257,23 @@ var VideoAdd = function (_React$Component) {
 
       if (columnarticle === '' || columnarticle === null) {
         alert('请选择需要添加文章的栏目');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.title.value === '' || this.refs.title.value === null) {
         alert('请填写文章标题');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.keywords.value === '' || this.refs.keywords.value === null) {
         alert('请填写关键字');
-        return;
+        event.preventDefault();
+        return false;
       }
       if (this.refs.description.value === '' || this.refs.description.value === null) {
         alert('请填写描述');
-        return;
+        event.preventDefault();
+        return false;
       }
 
       var articletype = [];
@@ -17523,18 +17589,50 @@ var Default = function (_React$Component) {
   function Default() {
     _classCallCheck(this, Default);
 
-    return _possibleConstructorReturn(this, (Default.__proto__ || Object.getPrototypeOf(Default)).call(this));
+    var _this = _possibleConstructorReturn(this, (Default.__proto__ || Object.getPrototypeOf(Default)).call(this));
+
+    _this.state = {
+      tongji: {}
+    };
+    _this.getBasicData = _this.getBasicData.bind(_this);
+    return _this;
   }
 
   _createClass(Default, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var getBasicData = this.getBasicData;
+      $.ajax({
+        url: '/route/data.get.php',
+        method: 'post',
+        data: { tag: 'bili', type: 'getindexdata' },
+        success: function success(data) {
+          data = JSON.parse(data);
+          if (parseInt(data.status, 10) === 1) {
+            getBasicData(data.data);
+          } else {
+            alert('获取系统配置信息失败');
+          }
+        },
+        error: function error(err) {
+          console.log(err);
+        }
+      });
+    }
+  }, {
+    key: 'getBasicData',
+    value: function getBasicData(data) {
+      console.log(data);
+      this.setState({
+        tongji: data
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'bili-default' },
         _react2.default.createElement(
           'h1',
           null,
@@ -17547,6 +17645,116 @@ var Default = function (_React$Component) {
             'a',
             { href: this.props.basicData.basehost, target: '_blank' },
             this.props.basicData.basehost
+          )
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          this.props.basicData.description
+        ),
+        _react2.default.createElement(
+          'table',
+          { cellSpacing: '0' },
+          _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                { colSpan: '2' },
+                '\u4FE1\u606F\u7EDF\u8BA1'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u7BA1\u7406\u5458'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                this.state.tongji.admin
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u4F1A\u5458'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                this.state.tongji.member
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u6587\u7AE0'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                this.state.tongji.article
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u5546\u54C1'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                this.state.tongji.shop
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u56FE\u7247'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                this.state.tongji.photo
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u89C6\u9891'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                this.state.tongji.video
+              )
+            )
           )
         )
       );

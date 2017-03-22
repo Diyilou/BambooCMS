@@ -67,6 +67,28 @@
     return;
   }
 
+  if (isset($_POST['type']) && $_POST['type'] == 'getuserfromid') {
+    $uid = $_POST['uid'];
+    global $dutils;
+    $sql = "select uname,usertype,userid from bili_admin";
+    $result = $dutils -> select($sql);
+    if ($result['type'] == '4') {
+      $data = $result['data'];
+      for ($i = 0, $len = count($data); $i < $len; $i++) {
+        if (md5($data[$i]['userid']) == $uid) {
+          echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type'], 'data' => $data[$i]));
+          return;
+        }
+      }
+
+      echo json_encode(array('status' => 0, 'msg' => '没有管理员', 'errno' => '0'));
+      return;
+    }
+
+    echo json_encode(array('status' => 0, 'msg' => '没有管理员', 'errno' => '0'));
+    return;
+  }
+
   if (isset($_POST['type']) && $_POST['type'] == 'deladmin') {
     $id = $_POST['id'];
     global $dutils;
@@ -90,7 +112,7 @@
     if ($result['type'] == '4') {
       $data = $result['data'];
       if ($data[0]['pwd'] == md5($pw)) {
-        echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type'], 'userid' => md5($data['userid'])));
+        echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type'], 'userid' => md5($data[0]['userid'])));
         return;
       }
 
