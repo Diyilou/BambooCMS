@@ -51,13 +51,9 @@
               $vhtmlShowStatus = 'block';
             }
 
-            $vhtml .= "<div style='display:$vhtmlShowStatus;' data-id='$typeid'>";
+            $vhtml .= "<div style='display:$vhtmlShowStatus;' data-id='$typeid'><a href='/wallpaper/$id.html'>";
               $vhtml .= "<img src='$litpic' />";
-              $vhtml .= "<h3>$title</h3>";
-              $vhtml .= "<a href='/wallpaper/$id.html'>show</a>";
-              $vhtml .= "<a href=''>comment</a>";
-              $vhtml .= "<a href=''>share</a>";
-            $vhtml .= "</div>";
+            $vhtml .= "</a></div>";
           }
         }
 

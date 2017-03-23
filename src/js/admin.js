@@ -25,6 +25,7 @@ import System from '../jsx/System.jsx';
 import SystemBasic from '../jsx/SystemBasic.jsx';
 
 import Template from '../jsx/Template.jsx';
+import TemplateUpdate from '../jsx/TemplateUpdate.jsx';
 
 import Login from '../jsx/Login.jsx';
 
@@ -81,6 +82,8 @@ if (userid !== '' && userid != null || !!userid !== false) {
             </Route>
           </Route>
           <Route path='/template' component={Template}>
+            <Route path='/template/update' component={TemplateUpdate}>
+            </Route>
           </Route>
         </Route>
     </Router>

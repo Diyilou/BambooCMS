@@ -144,5 +144,33 @@
       }
     }
 
+    function getNavSection ($typeid) {
+      if (isset($typeid) && !empty($typeid)) {
+        global $dutils;
+        $sql = "select typename,seotitle,id from bili_arctype where reid=$typeid";
+        $result = $dutils -> select($sql);
+
+        if ($result['type'] == '4') {
+          return $result;
+        }
+
+        return false;
+      }
+    }
+
+    function getNavDetail ($typeid) {
+      if (isset($typeid) && !empty($typeid)) {
+        global $dutils;
+        $sql = "select a.title,a.description,a.keywords,b.redirecturl from bili_archives a left join bili_addonarticle b on a.id=b.aid where a.typeid=$typeid";
+        $result = $dutils -> select($sql);
+
+        if ($result['type'] == '4') {
+          return $result;
+        }
+
+        return false;
+      }
+    }
+
 	}
 ?>
