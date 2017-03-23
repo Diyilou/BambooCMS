@@ -37,6 +37,13 @@
     padding: 8px;
     border-right: 1px solid $border-color;
     border-bottom: solid 1px $border-color;
+    > a {
+      display: inline-block;
+      padding: 3px 8px;
+      background-color: $blue-color;
+      color: $overall-color;
+      margin-left: 15px;
+    }
   }
   thead > tr > th:last-child{
     border-right: 0px;
@@ -46,5 +53,40 @@
   }
   tbody > tr:last-child > td {
     border-bottom: 0px;
+  }
+}
+
+.bili-template-update {
+  padding: 15px;
+  > h3 {
+    font-size: 16px;
+    color: $gray-color;
+    margin-bottom: 15px;
+    font-weight: 100;
+    > span {
+      display: inline-block;
+      color: $blue-color;
+      margin-left: 15px;
+    }
+  }
+  > textarea {
+    width: 95%;
+    height: 500px;
+    padding: 15px;
+    outline: none;
+    border: solid 1px $border-color;
+    font-size: 13px;
+    &:focus {
+      border: solid 1px $blue-color;
+    }
+  }
+  > div {
+    margin: 15px 0px;
+    > a {
+      display: inline-block;
+      padding: 3px 10px;
+      background-color: $blue-color;
+      color: $overall-color;
+    }
   }
 }
