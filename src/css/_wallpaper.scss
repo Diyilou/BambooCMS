@@ -1,0 +1,44 @@
+.p-wallpaper-pc {
+  > ul {
+    list-style: none;
+    width: 100%;
+    > li {
+      width: 100%;
+      height: auto;
+      > img {
+        width: 100%;
+        height: auto;
+      }
+      > span {
+        display: none;
+      }
+    }
+  }
+}
+
+.p-wallpaper-mobile {
+  > ul {
+    list-style: none;
+    width: 100%;
+    > li {
+      width: 100%;
+      height: auto;
+      text-align: center;
+      > img {
+        width: 640px;
+        height: auto;
+      }
+      > span {
+        display: none;
+      }
+    }
+  }
+}
+
+.p-wallpaper-con {
+  background-color: $overall-color;
+  padding: 15px;
+  > p {
+    font-size: 15px;
+  }
+}

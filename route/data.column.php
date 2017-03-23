@@ -165,6 +165,7 @@
     $body = $data['body'];
     $flag = $data['flag'];
     $channel = $data['channel'];
+    $litpic = $data['litpic'];
     $pubdate = time();
     // 检查空字段
     if (!isset($title) || empty($title) ||
@@ -175,7 +176,7 @@
     }
 
     // ded_archives 表
-    $sql = "insert into bili_archives (typeid,flag,click,title,shorttitle,writer,source,pubdate,keywords,description,channel) values ($typeid,'$flag', 0,'$title','$shorttitle','$writer','$source','$pubdate','$keywords','$description',$channel)";
+    $sql = "insert into bili_archives (litpic,typeid,flag,click,title,shorttitle,writer,source,pubdate,keywords,description,channel) values ('$litpic',$typeid,'$flag', 0,'$title','$shorttitle','$writer','$source','$pubdate','$keywords','$description',$channel)";
     $result = $dutils -> insert($sql);
     if ($result['type'] == '1') {
       $sql = "select id from bili_archives where pubdate='$pubdate'";
@@ -311,6 +312,7 @@
     $writer = $data['writer'];
     $body = $data['body'];
     $flag = $data['flag'];
+    $litpic = $data['litpic'];
     $aid = $_POST['aid'];
 
     // 检查空字段
@@ -322,7 +324,7 @@
     }
 
     // ded_archives 表
-    $sql = "update bili_archives set typeid=$typeid,flag='$flag',title='$title',shorttitle='$shorttitle',writer='$writer',source='$source',keywords='$keywords',description='$description' where id=$aid";
+    $sql = "update bili_archives set litpic='$litpic',typeid=$typeid,flag='$flag',title='$title',shorttitle='$shorttitle',writer='$writer',source='$source',keywords='$keywords',description='$description' where id=$aid";
     $result = $dutils -> update($sql);
     if ($result['type'] == '5') {
       $sql = "update bili_addonarticle set body='$body',redirecturl='$redirecturl' where aid=$aid";

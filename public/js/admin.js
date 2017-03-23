@@ -13054,11 +13054,13 @@ var ArticleAdd = function (_React$Component) {
 
     _this.state = {
       columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前文章所属栏目
-      imgsrc: ''
+      imgsrc: '',
+      litpic: ''
     };
     _this.postArticle = _this.postArticle.bind(_this);
     _this.changeImgSrc = _this.changeImgSrc.bind(_this);
     _this.setArticle = _this.setArticle.bind(_this);
+    _this.changeLitpic = _this.changeLitpic.bind(_this);
     return _this;
   }
 
@@ -13111,6 +13113,9 @@ var ArticleAdd = function (_React$Component) {
       this.refs.keywords.value = data.keywords, this.refs.description.value = data.description;
       this.refs.body.value = data.body;
       this.refs.writer.value = data.writer;
+      this.setState({
+        litpic: data.litpic
+      });
 
       var flag = data.flag.split(',');
       for (var i = 0, len = flag.length; i < len; i++) {
@@ -13223,7 +13228,8 @@ var ArticleAdd = function (_React$Component) {
         keywords: this.refs.keywords.value,
         description: this.refs.description.value,
         body: this.refs.body.value,
-        flag: articletype
+        flag: articletype,
+        litpic: this.state.litpic
       };
 
       console.log(sendData);
@@ -13275,10 +13281,40 @@ var ArticleAdd = function (_React$Component) {
       }
     }
   }, {
+    key: 'uploadLitpic',
+    value: function uploadLitpic(event) {
+      var changeLitpic = this.changeLitpic;
+      var subData = new FormData(this.refs.subForm1);
+      $.ajax({
+        type: "POST",
+        url: "/route/data.upload.php",
+        data: subData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function success(data) {
+          data = JSON.parse(data);
+          console.log(data);
+          changeLitpic(data);
+        },
+        error: function error(XMLHttpRequest, textStatus, errorThrown) {
+          alert("上传失败，请检查网络后重试");
+        }
+      });
+    }
+  }, {
+    key: 'changeLitpic',
+    value: function changeLitpic(data) {
+      this.setState({
+        litpic: data.url
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var postArticle = this.postArticle;
       var uploadImg = this.uploadImg;
+      var uploadLitpic = this.uploadLitpic;
       return _react2.default.createElement(
         'div',
         { className: 'bili-articleadd' },
@@ -13381,6 +13417,21 @@ var ArticleAdd = function (_React$Component) {
             '\u4F5C\u8005'
           ),
           _react2.default.createElement('input', { ref: 'writer', type: 'text' })
+        ),
+        _react2.default.createElement(
+          'h3',
+          null,
+          _react2.default.createElement(
+            'span',
+            null,
+            '\u4E0A\u4F20\u7F29\u7565\u56FE'
+          ),
+          _react2.default.createElement(
+            'form',
+            { className: 'uploadimgform', name: 'form1', ref: 'subForm1', encType: 'multipart/form-data', method: 'post' },
+            _react2.default.createElement('input', { type: 'file', name: 'file', accept: 'image/jpg,image/jpeg,image/png,image/gif', onChange: uploadLitpic.bind(this) })
+          ),
+          _react2.default.createElement('img', { src: this.state.litpic })
         ),
         _react2.default.createElement(
           'h3',

@@ -2,6 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8"/>
+    <?php
+      require_once(dirname(__file__) . '/../route/data.client.php');
+      global $wallpaperData;
+      global $client;
+      $client = new Client();
+      $result = $client -> getWallpaper($aid);
+      $wallpaperData = $result['data'][0];
+      echo "<title>".$wallpaperData['title']."</title>";
+      echo "<meta name='keywords' content='".$wallpaperData['keywords']."' />";
+      echo "<meta name='description' content='".$wallpaperData['description']."' />";
+    ?>
     <title></title>
     <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
   </head>
@@ -27,9 +38,31 @@
     <div class="p-banner">
       <img src="/public/images/writersay.png" />
     </div>
-    <section class="p-content p-wallpaper-content">
-      壁纸详情页
+    <section class="p-course-article">
+      <div class="p-course-right p-content-description">
+        <?php
+          $title = $wallpaperData['title'];
+          $click = $wallpaperData['title'];
+          $time = $wallpaperData['pubdate'];
+
+          echo "<h1>$title</h1>";
+          echo "<h2><span>类型</span><span>ps</span></h2>";
+          echo "<h2><span>点击</span><span>11</span></h2>";
+          echo "<h2><span>上传时间</span><span>$time</span></h3>"
+        ?>
+      </div>
+      <div class="p-course-left">
+        <?php
+          $pc = $client -> getWallpaperPC($aid,'12')['data'][0];
+          $mobile = $client -> getWallpaperPC($aid,'13')['data'][0];
+          echo "<div class='p-wallpaper-pc'><ul>".$pc['body']."</ul></div>";
+          echo "<div style='display:none;' class='p-wallpaper-mobile'><ul>".$mobile['body']."</ul></div>";
+          echo "<div class='p-wallpaper-con'><p>".$wallpaperData['body']."</p></div>";
+        ?>
+      </div>
     </section>
     <footer></footer>
+    <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="/public/js/main.js"></script>
   </body>
 </html>
