@@ -6,11 +6,13 @@ class ArticleAdd extends React.Component {
     super();
     this.state = {
       columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前文章所属栏目
-      imgsrc: ''
+      imgsrc: '',
+      litpic: ''
     }
     this.postArticle = this.postArticle.bind(this);
     this.changeImgSrc = this.changeImgSrc.bind(this);
     this.setArticle = this.setArticle.bind(this);
+    this.changeLitpic = this.changeLitpic.bind(this);
   }
 
   changeImgSrc (data) {
@@ -59,6 +61,9 @@ class ArticleAdd extends React.Component {
     this.refs.description.value = data.description;
     this.refs.body.value = data.body;
     this.refs.writer.value = data.writer;
+    this.setState({
+      litpic: data.litpic
+    });
 
     var flag = data.flag.split(',');
     for (var i = 0, len = flag.length; i< len; i++) {
@@ -170,7 +175,8 @@ class ArticleAdd extends React.Component {
         keywords: this.refs.keywords.value,
         description: this.refs.description.value,
         body: this.refs.body.value,
-        flag: articletype
+        flag: articletype,
+        litpic: this.state.litpic
     }
 
     console.log(sendData);
@@ -221,9 +227,38 @@ class ArticleAdd extends React.Component {
       alert('未知的文章操作方式');
     }
   }
+
+  uploadLitpic (event) {
+		var changeLitpic = this.changeLitpic;
+		var subData = new FormData(this.refs.subForm1);
+    $.ajax({
+        type: "POST",
+        url: "/route/data.upload.php",
+        data: subData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+            data = JSON.parse(data);
+            console.log(data);
+            changeLitpic(data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("上传失败，请检查网络后重试");
+        }
+    });
+  }
+
+  changeLitpic (data) {
+    this.setState({
+      litpic: data.url
+    });
+  }
+
   render () {
     var postArticle = this.postArticle;
     var uploadImg = this.uploadImg;
+    var uploadLitpic = this.uploadLitpic;
     return (
       <div className='bili-articleadd'>
         <ul>
@@ -248,6 +283,13 @@ class ArticleAdd extends React.Component {
         <h3>
           <span>文章来源</span><input ref='source' type='text' />
           <span>作者</span><input ref='writer' type='text' />
+        </h3>
+        <h3>
+          <span>上传缩略图</span>
+          <form className="uploadimgform" name="form1" ref="subForm1" encType="multipart/form-data" method="post">
+            <input type="file" name="file" accept="image/jpg,image/jpeg,image/png,image/gif" onChange={uploadLitpic.bind(this)} />
+          </form>
+          <img src={this.state.litpic} />
         </h3>
         <h3>关键字*</h3>
         <div>

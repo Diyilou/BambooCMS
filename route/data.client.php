@@ -64,6 +64,57 @@
       }
     }
 
+    function getWallpaper ($aid) {
+
+      if (isset($aid) && !empty($aid)) {
+
+        global $dutils;
+        $sql = "select a.title,a.keywords,a.pubdate,a.description,a.litpic,a.click,b.body from bili_archives a left join bili_addonarticle b on a.id=b.aid where a.id=$aid";
+
+        $result = $dutils -> select($sql);
+
+        if ($result['type'] == '4') {
+          return $result;
+        }
+
+        return false;
+      }
+    }
+
+    function getWallpaperPC ($aid, $typeid) {
+
+      if (isset($aid) && !empty($aid) && isset($typeid) && !empty($typeid)) {
+
+        global $dutils;
+        $sql = "select a.title,b.body from bili_archives a left join bili_addonarticle b on a.id=b.aid where a.id in (select aid from bili_taglist where tag like '%$aid%' and typeid=$typeid)";
+
+        $result = $dutils -> select($sql);
+
+        if ($result['type'] == '4') {
+          return $result;
+        }
+
+        return false;
+      }
+    }
+
+    function getWallpaperMobile ($aid, $typeid) {
+
+      if (isset($aid) && !empty($aid) && isset($typeid) && !empty($typeid)) {
+
+        global $dutils;
+        $sql = "select a.title,b.body from bili_archives a left join bili_addonarticle b on a.id=b.aid where a.id in (select aid from bili_taglist where tag like '%$aid%' and typeid=$typeid)";
+
+        $result = $dutils -> select($sql);
+
+        if ($result['type'] == '4') {
+          return $result;
+        }
+
+        return false;
+      }
+    }
+
     // 获得所有的壁纸栏目
     function getWallPaperColumn () {
       global $dutils;
