@@ -2,7 +2,7 @@
   var $videoColumn = $('#videoColumn');
   var $videoList = $('#videoList');
   var $divs = $videoList.children('div');
-  
+
   $videoColumn.find('a').on('click', function () {
     var id = $(this).attr('data-id');
     $(this).removeClass('column-leave').addClass('column-click');
@@ -16,4 +16,26 @@
       }
     }
   });
+
+  var href = window.location.href;
+  var len = href.split('/').length;
+  var id = href.split('/')[len-1].split('.')[0];
+  if (id) {
+    $.ajax({
+      url: '/route/data.request.php',
+      method: 'post',
+      data: {tag: 'bili', type: 'changeclickdata', aid: id},
+        success: function (data) {
+          data = JSON.parse(data);
+          if (parseInt(data.status) == 1) {
+            console.log('ok');
+          } else {
+            alert(data.msg);
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+    });
+  }
 })();
