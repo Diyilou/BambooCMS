@@ -52,8 +52,8 @@
           echo "<h2><span>浏览量</span><span>$click</span></h2>";
           echo "<h2><span>上传时间</span><span>".date('Y-m-d H:i:s', $time)."</span></h3>";
 
-          $pc = $client -> getWallpaperPC($aid,'12')['data'][0];
-          $mobile = $client -> getWallpaperPC($aid,'13')['data'][0];
+          $pc = $client -> getWallpaperPC($aid,'3')['data'][0];
+          $mobile = $client -> getWallpaperPC($aid,'4')['data'][0];
 
           if (preg_match('/\/\.\.\/upload.*?\.(jpg|png|bmp|jpeg|gif)/', $pc['body'], $matchs)) {
             $pimgurl = $matchs[0];

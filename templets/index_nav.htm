@@ -31,7 +31,7 @@
         <?php
           require_once(dirname(__file__) . '/../route/data.client.php');
           $client = new Client();
-          $result = $client -> getNavSection(24)['data'];
+          $result = $client -> getNavSection(5)['data'];
           $html = "";
           for ($i = 0, $len = count($result); $i < $len; $i++) {
             $html .= "<li><a href='javascript:void(0)' title='".$result[$i]['seotitle']."'>".$result[$i]['typename']."</a>";

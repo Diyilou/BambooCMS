@@ -118,7 +118,7 @@
     // 获得所有的壁纸栏目
     function getWallPaperColumn () {
       global $dutils;
-      $sql = "select * from bili_arctype where reid=11";
+      $sql = "select * from bili_arctype where reid=2";
       $result = $dutils -> select($sql);
       // success and $typename is empty
       if ($result['type'] == '4') {
