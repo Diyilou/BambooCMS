@@ -37,7 +37,6 @@ CREATE TABLE `bili_addonarticle` (
 
 LOCK TABLES `bili_addonarticle` WRITE;
 /*!40000 ALTER TABLE `bili_addonarticle` DISABLE KEYS */;
-INSERT INTO `bili_addonarticle` VALUES (1,2,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=k0023j2kgli&tiny=0&auto=0\" allowfullscreen></iframe>\n\n杨幂刘亦菲撞了三次角色 谁才是古装第一美人？',''),(2,2,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=v0385mjpiw8&tiny=0&auto=0\" allowfullscreen></iframe>\n张杰一首《我要你》情韵开唱 复古有又浪漫',''),(3,2,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=y0023qd9k8l&tiny=0&auto=0\" allowfullscreen></iframe>\n[独家首发]《极光之恋》超长片花：马可恋关晓彤狂撩少女心',''),(4,2,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=f0383q4f5m8&tiny=0&auto=0\" allowfullscreen></iframe>\n任素汐失恋被质问：你能为他改变什么？',''),(5,2,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=k0023w7futr&tiny=0&auto=0\" allowfullscreen></iframe>\n北京广州等4城同日出台限购 半月内已有16城加码',''),(6,3,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=w00236a5w8l&tiny=0&auto=0\" allowfullscreen></iframe>\n石头也能下蛋？ 神秘山崖每30年产蛋一枚原因未知',''),(7,3,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=x0023z2u1vv&tiny=0&auto=0\" allowfullscreen></iframe>\n美女体验泰国廉价VR 全程靠服务员摇晃',''),(8,5,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=v0022c132j0&tiny=0&auto=0\" allowfullscreen></iframe>\n炸弹“炸”出绝美天坑 墨西哥这里竟藏着惊天秘密','');
 /*!40000 ALTER TABLE `bili_addonarticle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -116,6 +115,7 @@ CREATE TABLE `bili_archives` (
   `typeid` smallint(5) NOT NULL,
   `flag` char(60) DEFAULT NULL,
   `click` mediumint(8) NOT NULL,
+  `vote` mediumint(8) DEFAULT NULL,
   `channel` mediumint(8) NOT NULL,
   `title` char(60) NOT NULL,
   `shorttitle` char(36) DEFAULT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `bili_archives` (
   `keywords` char(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,6 @@ CREATE TABLE `bili_archives` (
 
 LOCK TABLES `bili_archives` WRITE;
 /*!40000 ALTER TABLE `bili_archives` DISABLE KEYS */;
-INSERT INTO `bili_archives` VALUES (1,2,'a',0,3,'杨幂刘亦菲撞了三次角色 谁才是古装第一美人？','','张明鑫','','/../upload/images/1489889288/1.png',1489888007,'杨幂刘亦菲撞了三次角色 谁才是古装第一美人？','杨幂刘亦菲撞了三次角色 谁才是古装第一美人？'),(2,2,'',0,3,'张杰一首《我要你》情韵开唱 复古有又浪漫','','张明鑫','','/../upload/images/1489889295/2.png',1489888174,'张杰一首《我要你》情韵开唱 复古有又浪漫','张杰一首《我要你》情韵开唱 复古有又浪漫'),(3,2,'',0,3,'[独家首发]《极光之恋》超长片花：马可恋关晓彤狂撩少女心','','张明鑫','','/../upload/images/1489889559/3.png',1489888805,'[独家首发]《极光之恋》超长片花：马可恋关晓彤狂撩少女心','[独家首发]《极光之恋》超长片花：马可恋关晓彤狂撩少女心'),(4,2,'',0,3,'任素汐失恋被质问：你能为他改变什么？','','张明鑫','','/../upload/images/1489889638/4.png',1489889640,'任素汐失恋被质问：你能为他改变什么？','任素汐失恋被质问：你能为他改变什么？'),(5,2,'',0,3,'北京广州等4城同日出台限购 半月内已有16城加码','','张明鑫','','/../upload/images/1489889737/5.png',1489889739,'北京广州等4城同日出台限购 半月内已有16城加码','北京广州等4城同日出台限购 半月内已有16城加码'),(6,3,'',0,3,'石头也能下蛋？ 神秘山崖每30年产蛋一枚原因未知','','张明鑫','','/../upload/images/1489889823/6.png',1489889833,'石头也能下蛋？ 神秘山崖每30年产蛋一枚原因未知','石头也能下蛋？ 神秘山崖每30年产蛋一枚原因未知'),(7,3,'',0,3,'美女体验泰国廉价VR 全程靠服务员摇晃','','张明鑫','','/../upload/images/1489889874/7.png',1489889892,'美女体验泰国廉价VR 全程靠服务员摇晃','美女体验泰国廉价VR 全程靠服务员摇晃'),(8,5,'',0,3,'炸弹“炸”出绝美天坑 墨西哥这里竟藏着惊天秘密','','张明鑫','','/../upload/images/1489889989/9.png',1489890001,'炸弹“炸”出绝美天坑 墨西哥这里竟藏着惊天秘密','炸弹“炸”出绝美天坑 墨西哥这里竟藏着惊天秘密');
 /*!40000 ALTER TABLE `bili_archives` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,7 +161,7 @@ CREATE TABLE `bili_arctype` (
   `sitepath` char(60) DEFAULT NULL,
   `siteurl` char(60) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,7 +170,7 @@ CREATE TABLE `bili_arctype` (
 
 LOCK TABLES `bili_arctype` WRITE;
 /*!40000 ALTER TABLE `bili_arctype` DISABLE KEYS */;
-INSERT INTO `bili_arctype` VALUES (1,0,3,'视频教程','/videos/','index_videos.htm','article_videos.htm','','','视频教程_完美像素',0,'',NULL,NULL),(2,1,3,'Photo Shop','/videos/ps/','list_videos.htm','article_videos.htm','','','ps视频教程',0,'',NULL,NULL),(3,1,3,'Illustrator','/videos/illustrator/','list_videos.htm','article_videos.htm','','','Illustrator视频教程',0,'',NULL,NULL),(4,1,3,'Indesign','/videos/indesign/','list_videos.htm','article_videos.htm','','','Indesign视频教程',0,'',NULL,NULL),(5,1,3,'After effect','/aftereffect/','list_videos.htm','article_videos.htm','','','After effect视频教程',0,'',NULL,NULL),(6,1,3,'Premiere','/videos/premiere/','list_article.htm','article_article.htm','','','Premiere视频教程',0,'',NULL,NULL),(7,1,3,'Cinemal 4D','/videos/cinemal/','list_videos.htm','article_videos.htm','','','Cinemal 4D视频教程',0,'',NULL,NULL),(8,1,0,'3D Max','/3dmax/','list_videos.htm','article_videos.htm','','','3D Max视频教程',0,'',NULL,NULL),(10,1,3,'Maya','/videos/maya/','list_videos.htm','article_videos.htm','','','Maya视频教程',0,'',NULL,NULL),(11,0,0,'壁纸','/wallpaper/','index_wallpaper.htm','article_wallpaper.htm','','','壁纸',0,'',NULL,NULL),(12,0,2,'壁纸_pc','/wallpaper_pc/','index_wallpaper.htm','article_wallpaper.htm','','','壁纸_pc',1,'',NULL,NULL),(13,0,2,'壁纸_mobile','/wallpaper_mobile/','index_wallpaper.htm','article_wallpaper.htm','','','壁纸_mobile',1,'',NULL,NULL),(14,11,0,'明星','/wallpaper/mingxing/','index_wallpaper.htm','article_wallpaper.htm','明星_壁纸','明星_壁纸','明星_壁纸',0,'明星_壁纸',NULL,NULL),(15,11,0,'爱车','/wallpaper/aiche/','index_wallpaper.htm','article_wallpaper.htm','爱车_壁纸','爱车_壁纸','爱车_壁纸',0,'爱车_壁纸',NULL,NULL),(16,11,0,'美景','/wallpaper/meijing/','index_wallpaper.htm','article_wallpaper.htm','美景_壁纸','美景_壁纸','美景_壁纸',0,'美景_壁纸',NULL,NULL),(17,11,0,'动物','/wallpaper/dongwu/','index_wallpaper.htm','article_wallpaper.htm','动物_壁纸','动物_壁纸','动物_壁纸',0,'动物_壁纸',NULL,NULL),(18,11,0,'影视','/wallpaper/yingshi/','index_wallpaper.htm','article_wallpaper.htm','影视_壁纸','影视_壁纸','影视_壁纸',0,'影视_壁纸',NULL,NULL),(19,11,0,'卡通','/wallpaper/katong/','index_wallpaper.htm','article_wallpaper.htm','卡通_壁纸','卡通_壁纸','卡通_壁纸',0,'卡通_壁纸',NULL,NULL),(20,11,0,'设计','/wallpaper/sheji/','index_wallpaper.htm','article_paper.htm','设计_壁纸','设计_壁纸','设计_壁纸',0,'设计_壁纸',NULL,NULL),(21,11,0,'艺术','/yishu/','index_wallpaper.htm','article_wallpaper.htm','艺术_壁纸','艺术_壁纸','艺术_壁纸',0,'艺术_壁纸',NULL,NULL),(22,11,0,'摄影','/wallpaper/sheying/','index_wallpaper.htm','article_wallpaper.htm','摄影_壁纸','摄影_壁纸','摄影_壁纸',0,'摄影_壁纸',NULL,NULL),(23,11,0,'绘画','/huihua/','index_wallpaper.htm','article_wallpaper.htm','绘画_壁纸','绘画_壁纸','绘画_壁纸',0,'绘画_壁纸',NULL,NULL);
+INSERT INTO `bili_arctype` VALUES (1,0,3,'视频教程','/videos/','index_videos.htm','article_videos.htm','视频教程_完美像素','视频教程_完美像素','视频教程_完美像素',0,'视频教程_完美像素',NULL,NULL),(2,0,0,'壁纸','/wallpaper/','index_wallpaper.htm','article_wallpaper.htm','壁纸_完美像素','壁纸_完美像素','壁纸_完美像素',0,'壁纸_完美像素',NULL,NULL),(3,0,2,'壁纸_pc','/wallpaper_pc/','index_wallpaper.htm','article_wallpaper.htm','壁纸_pc_完美像素','壁纸_pc_完美像素','壁纸_pc_完美像素',0,'壁纸_pc_完美像素',NULL,NULL),(4,0,2,'壁纸_mobile','/wallpaper_mobile/','index_wallpaper.htm','article_wallpaper.htm','壁纸_mobile_完美像素','壁纸_mobile_完美像素','壁纸_mobile_完美像素',0,'壁纸_mobile_完美像素',NULL,NULL),(5,0,0,'设计师导航','/nav/','index_nav.htm','article_nav.htm','','','设计师导航_完美像素',0,'',NULL,NULL),(6,1,3,'Photo shop','/ps/','index_videos.htm','article_videos.htm','','','ps',0,'',NULL,NULL),(7,1,3,'illustrator','/illustrator/','index_videos.htm','article_videos.htm','','','illustrator',0,'',NULL,NULL),(8,1,3,'Indesign','/indesign/','index_videos.htm','article_videos.htm','','','Indesign',0,'',NULL,NULL),(9,1,3,'After effect','/after_effect/','index_videos.htm','article_videos.htm','','','After effect',0,'',NULL,NULL),(10,1,3,'Premiere','/premiere/','index_videos.htm','article_videos.htm','','','Premiere',0,'',NULL,NULL),(11,1,3,'Cinemal 4D','/cinemal_4d/','index_videos.htm','article_videos.htm','','','Cinemal 4D',0,'',NULL,NULL),(12,1,3,'3D Max','/3d_max/','index_videos.htm','article_videos.htm','','','3D Max',0,'',NULL,NULL),(13,1,3,'Maya','/maya/','index_videos.htm','article_videos.htm','','','Maya',0,'',NULL,NULL),(14,2,0,'明星','/mingxin/','index_wallpaper.htm','article_wallpaper.htm','','','明星',0,'',NULL,NULL),(15,2,0,'爱车','/aiche/','index_wallpaper.htm','article_wapaper.htm','','','爱车',0,'',NULL,NULL),(16,2,0,'美景','/meijing/','index_videos.htm','article_wallpaper.htm','','','美景',0,'',NULL,NULL),(17,2,0,'动物','/dongwu/','index_wallpaper.htm','article_wallpaper.htm','','','动物',0,'',NULL,NULL),(18,2,0,'影视','/yingshi/','index_wallpaper.htm','article_wallpaper.htm','','','影视',0,'',NULL,NULL),(19,2,0,'艺术','/yishu/','index_wallpaper.htm','article_wallpaper.htm','','','艺术',0,'',NULL,NULL),(20,2,0,'卡通','/katong/','index_videos.htm','article_videos.htm','','','卡通',0,'',NULL,NULL),(21,2,0,'设计','/sheji/','index_wallpaper.htm','article_wallpaper.htm','','','设计',0,'',NULL,NULL),(22,2,0,'摄影','/sheying/','index_wallpaper.htm','article_wallpaper.htm','','','摄影',0,'',NULL,NULL),(23,2,0,'绘画','/huihua/','index_wallpaper.htm','article_wallpaper.htm','','','绘画',0,'',NULL,NULL),(24,5,0,'资源下载','/ziyuan/','index_nav.htm','article_nav.htm','','','资源下载',0,'',NULL,NULL),(25,5,0,'设计教程','/jiaocheng/','index_nav.htm','article_nav.htm','','','设计教程',0,'',NULL,NULL),(26,5,0,'高清图片','/tupian/','index_nav.htm','article_nav.htm','','','高清图片',0,'',NULL,NULL),(27,5,0,'配色方案','/peise/','配色方案','配色方案','','','配色方案',0,'',NULL,NULL),(28,5,0,'界面设计','/jiemian/','界面设计','界面设计','界面设计','界面设计','界面设计',0,'',NULL,NULL),(29,5,0,'网站模板','/muban/','网站模板','网站模板','','','网站模板',0,'',NULL,NULL),(30,5,0,'酷站推荐','/kuzhan/','酷站推荐','酷站推荐','','','酷站推荐',0,'',NULL,NULL),(31,5,0,'灵感创意','/linggan/','灵感创意','灵感创意','','','灵感创意',0,'',NULL,NULL),(32,5,0,'字体设计','/font/','字体设计','字体设计','','','字体设计',0,'',NULL,NULL),(33,5,0,'行业名博','/hangye/','行业名博','行业名博','','','行业名博',0,'',NULL,NULL),(34,5,0,'信息图','/xinxi/','信息图','信息图','','信息图','信息图',0,'',NULL,NULL),(35,5,0,'交互设计','/jiaohu/','交互设计','交互设计','','','交互设计',0,'',NULL,NULL),(36,5,0,'摄影美图','/sheying/','摄影美图','摄影美图','','','摄影美图',0,'',NULL,NULL),(37,5,0,'漫画插件','/chajian/','漫画插件','漫画插件','','','漫画插件',0,'',NULL,NULL),(38,5,0,'互联网资讯','/zixun/','互联网资讯','互联网资讯','','互联网资讯','互联网资讯',0,'',NULL,NULL),(39,5,0,'神器推荐','/shenqi/','神器推荐','神器推荐','','','神器推荐',0,'',NULL,NULL),(40,5,0,'热门微博','/weibo/','热门微博','热门微博','','','热门微博',0,'',NULL,NULL);
 /*!40000 ALTER TABLE `bili_arctype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,6 +256,7 @@ CREATE TABLE `bili_member` (
   `exptime` smallint(6) DEFAULT NULL,
   `money` mediumint(8) DEFAULT NULL,
   `email` char(50) NOT NULL,
+  `address` char(50) DEFAULT NULL,
   `phone` char(50) DEFAULT NULL,
   `scores` mediumint(8) DEFAULT NULL,
   `face` char(50) DEFAULT NULL,
@@ -323,7 +323,7 @@ CREATE TABLE `bili_taglist` (
   `typeid` smallint(5) NOT NULL,
   `tag` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,7 +332,6 @@ CREATE TABLE `bili_taglist` (
 
 LOCK TABLES `bili_taglist` WRITE;
 /*!40000 ALTER TABLE `bili_taglist` DISABLE KEYS */;
-INSERT INTO `bili_taglist` VALUES (1,1,2,'古装美女'),(2,2,2,'我要你'),(3,3,2,''),(4,4,2,''),(5,5,2,''),(6,6,3,''),(7,7,3,''),(8,8,5,'');
 /*!40000 ALTER TABLE `bili_taglist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -345,4 +344,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-19 22:16:30
+-- Dump completed on 2017-03-25 13:05:46
