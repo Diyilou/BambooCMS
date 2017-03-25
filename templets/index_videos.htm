@@ -2,7 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title></title>
+    <title>设计视频教程_完美像素</title>
+    <meta name="keywords" content="设计视频教程,ps视频教程,AE视频教程,Pr视频教程,AE,Pr,免费视频教程,完美像素" />
+    <meta name="description" content="完美像素设计视频教程：为您提供ps、AE、Pr等免费的视频教程，视频教程由专业人士录制，设计之路，从这里启航。" />
     <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
@@ -10,16 +12,15 @@
       <nav>
         <a title="完美像素" href="/"><img src="/public/images/logo.png" alt="完美像素"></a>
         <ul>
-          <li><a href="/">首页推荐</a></li>
-          <li><a href="/course/">视频教程</a></li>
-          <li><a href="/wallpaper/">精美壁纸</a></li>
-          <li><a href="/tools/">美图工具</a></li>
-          <li><a href="/shop/">像素商城</a></li>
-          <li><a href="/nav/">设计导航</a></li>
+          <li><a title="首页推荐_完美像素" target="_blank" href="/">首页推荐</a></li>
+          <li><a title="视频教程_完美像素" target="_blank" href="/course/">视频教程</a></li>
+          <li><a title="精美壁纸免费下载_完美像素" target="_blank" href="/wallpaper/">精美壁纸</a></li>
+          <li><a title="美图工具_完美像素" target="_blank" href="/tools/">美图工具</a></li>
+          <li><a title="设计师网址导航_完美像素" target="_blank" href="/nav/">设计导航</a></li>
         </ul>
         <ul>
-          <li><a href=''>注册</a></li>
-          <li><a href=''>登录</a></li>
+          <li><a href='#'>注册</a></li>
+          <li><a href='#'>登录</a></li>
           <li><input type='text' placeholder="search"></li>
         </ul>
       </nav>
@@ -46,17 +47,24 @@
             $title = $result1[$j]['title'];
             $id = $result1[$j]['id'];
             $typedir = $result1[$j]['typedir'];
+            $pubdate = $result1[$j]['pubdate'];
+            $click = $result1[$j]['click'];
             $vhtmlShowStatus = 'none';
             if ($i === 0) {
               $vhtmlShowStatus = 'block';
             }
 
             $vhtml .= "<div style='display:$vhtmlShowStatus;' data-id='$typeid'>";
-              $vhtml .= "<img src='$litpic' />";
+              $vhtml .= "<a title='$title' target='_blank' href='/course/$id.html'>";
+              $vhtml .= "<div>";
+              $vhtml .= "<img src='$litpic' alt='$title'/>";
+              $vhtml .= "</div>";
               $vhtml .= "<h3>$title</h3>";
-              $vhtml .= "<a href='/course/$id.html'>show</a>";
-              $vhtml .= "<a href=''>comment</a>";
-              $vhtml .= "<a href=''>share</a>";
+              $vhtml .= "</a>";
+              $vhtml .= "<span>";
+              $vhtml .= "<a href=''>".date("m-d",$pubdate)."</a>";
+              $vhtml .= "<a href=''>$click</a>";
+              $vhtml .= "</span>";
             $vhtml .= "</div>";
           }
         }

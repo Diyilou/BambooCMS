@@ -10,16 +10,15 @@
       <nav>
         <a title="完美像素" href="/"><img src="/public/images/logo.png" alt="完美像素"></a>
         <ul>
-          <li><a href="/">首页推荐</a></li>
-          <li><a href="/course/">视频教程</a></li>
-          <li><a href="/wallpaper/">精美壁纸</a></li>
-          <li><a href="/tools/">美图工具</a></li>
-          <li><a href="/shop/">像素商城</a></li>
-          <li><a href="/nav/">设计导航</a></li>
+          <li><a title="首页推荐_完美像素" target="_blank" href="/">首页推荐</a></li>
+          <li><a title="视频教程_完美像素" target="_blank" href="/course/">视频教程</a></li>
+          <li><a title="精美壁纸免费下载_完美像素" target="_blank" href="/wallpaper/">精美壁纸</a></li>
+          <li><a title="美图工具_完美像素" target="_blank" href="/tools/">美图工具</a></li>
+          <li><a title="设计师网址导航_完美像素" target="_blank" href="/nav/">设计导航</a></li>
         </ul>
         <ul>
-          <li><a href=''>注册</a></li>
-          <li><a href=''>登录</a></li>
+          <li><a href='#'>注册</a></li>
+          <li><a href='#'>登录</a></li>
           <li><input type='text' placeholder="search"></li>
         </ul>
       </nav>
@@ -41,7 +40,7 @@
               $navCon = $client -> getNavDetail($topid)['data'];
               $navHtml = "<ul>";
               for ($j = 0, $len1 = count($navCon); $j < $len1; $j++) {
-                $navHtml .= "<li><a target='_blank' rel='nofollow' href='".$navCon[$j]['redirecturl']."'><span>".$navCon[$j]['title']."</span><span>".$navCon[$i]['description']."</span></a></li>";
+                $navHtml .= "<li><a title='".$navCon[$j]['title']."' target='_blank' rel='nofollow' href='".$navCon[$j]['redirecturl']."'><span>".$navCon[$j]['title']."</span><span>".$navCon[$i]['description']."</span></a></li>";
               }
               $navHtml .= "</ul>";
               $html.= $navHtml."</li>";

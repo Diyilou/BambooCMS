@@ -24,7 +24,7 @@
 
       if (isset($typeid) && !empty($typeid)) {
         global $dutils;
-        $sql = "select a.litpic,a.title,a.id,a.typeid,b.typedir from bili_archives a left join bili_arctype b on a.typeid=b.id where b.id=$typeid order by pubdate desc";
+        $sql = "select a.litpic,a.title,a.click,a.pubdate,a.id,a.typeid,b.typedir from bili_archives a left join bili_arctype b on a.typeid=b.id where b.id=$typeid order by pubdate desc";
         $result = $dutils -> select($sql);
 
         if ($result['type'] == '4') {
@@ -37,7 +37,7 @@
 
     function getIndexVideosList () {
       global $dutils;
-      $sql = "select a.litpic,a.title,a.id,a.typeid,b.typedir from bili_archives a left join bili_arctype b on a.typeid=b.id where b.id in (select id from bili_arctype where reid=1) order by pubdate desc limit 0,20";
+      $sql = "select a.litpic,a.pubdate,a.click,a.title,a.id,a.typeid,b.typedir from bili_archives a left join bili_arctype b on a.typeid=b.id where b.id in (select id from bili_arctype where reid=1) order by pubdate desc limit 0,20";
       $result = $dutils -> select($sql);
 
       if ($result['type'] == '4') {
@@ -52,7 +52,7 @@
       if (isset($aid) && !empty($aid)) {
 
         global $dutils;
-        $sql = "select a.title,a.keywords,a.pubdate,a.description,a.litpic,a.click,b.body from bili_archives a left join bili_addonarticle b on a.id=b.aid where a.id=$aid";
+        $sql = "select a.title,a.writer,a.keywords,a.pubdate,a.description,a.litpic,a.click,b.body,c.typename from (bili_archives a left join bili_addonarticle b on a.id=b.aid) left join bili_arctype c on a.typeid=c.id where a.id=$aid";
 
         $result = $dutils -> select($sql);
 
@@ -69,7 +69,7 @@
       if (isset($aid) && !empty($aid)) {
 
         global $dutils;
-        $sql = "select a.title,a.keywords,a.pubdate,a.description,a.litpic,a.click,b.body from bili_archives a left join bili_addonarticle b on a.id=b.aid where a.id=$aid";
+        $sql = "select a.title,a.writer,a.keywords,a.pubdate,a.description,a.litpic,a.click,b.body,c.typename from (bili_archives a left join bili_addonarticle b on a.id=b.aid) left join bili_arctype c on a.typeid=c.id where a.id=$aid";
 
         $result = $dutils -> select($sql);
 

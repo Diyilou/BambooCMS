@@ -21,16 +21,15 @@
       <nav>
         <a title="完美像素" href="/"><img src="/public/images/logo.png" alt="完美像素"></a>
         <ul>
-          <li><a href="/">首页推荐</a></li>
-          <li><a href="/course/">视频教程</a></li>
-          <li><a href="/wallpaper/">精美壁纸</a></li>
-          <li><a href="/tools/">美图工具</a></li>
-          <li><a href="/shop/">像素商城</a></li>
-          <li><a href="/nav/">设计导航</a></li>
+          <li><a title="首页推荐_完美像素" target="_blank" href="/">首页推荐</a></li>
+          <li><a title="视频教程_完美像素" target="_blank" href="/course/">视频教程</a></li>
+          <li><a title="精美壁纸免费下载_完美像素" target="_blank" href="/wallpaper/">精美壁纸</a></li>
+          <li><a title="美图工具_完美像素" target="_blank" href="/tools/">美图工具</a></li>
+          <li><a title="设计师网址导航_完美像素" target="_blank" href="/nav/">设计导航</a></li>
         </ul>
         <ul>
-          <li><a href=''>注册</a></li>
-          <li><a href=''>登录</a></li>
+          <li><a href='#'>注册</a></li>
+          <li><a href='#'>登录</a></li>
           <li><input type='text' placeholder="search"></li>
         </ul>
       </nav>
@@ -42,13 +41,34 @@
       <div class="p-course-right p-content-description">
         <?php
           $title = $wallpaperData['title'];
-          $click = $wallpaperData['title'];
+          $click = $wallpaperData['click'];
           $time = $wallpaperData['pubdate'];
+          $writer = $wallpaperData['writer'];
+          $typename = $wallpaperData['typename'];
 
           echo "<h1>$title</h1>";
-          echo "<h2><span>类型</span><span>ps</span></h2>";
-          echo "<h2><span>点击</span><span>11</span></h2>";
-          echo "<h2><span>上传时间</span><span>$time</span></h3>"
+          echo "<h2><span>作者</span><span>$writer</span></h2>";
+          echo "<h2><span>类型</span><span>$typename</span></h2>";
+          echo "<h2><span>浏览量</span><span>$click</span></h2>";
+          echo "<h2><span>上传时间</span><span>".date('Y-m-d H:i:s', $time)."</span></h3>";
+
+          $pc = $client -> getWallpaperPC($aid,'12')['data'][0];
+          $mobile = $client -> getWallpaperPC($aid,'13')['data'][0];
+
+          if (preg_match('/\/\.\.\/upload.*?\.(jpg|png|bmp|jpeg|gif)/', $pc['body'], $matchs)) {
+            $pimgurl = $matchs[0];
+          }
+
+          if (preg_match('/\/\.\.\/upload.*?\.(jpg|png|bmp|jpeg|gif)/', $mobile['body'], $matchs)) {
+            $mimgurl = $matchs[0];
+          }
+
+          $html = "<ul>";
+            $html .= "<li><a title='".$title."_电脑端' download target='_blank' href='$pimgurl'>电脑端下载</a></li>";
+            $html .= "<li><a title='".$title."_手机端' download target='_blank' href='$mimgurl'>手机端下载</a></li>";
+          $html .= "</ul>";
+
+          echo $html;
         ?>
       </div>
       <div class="p-course-left">
