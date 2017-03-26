@@ -61,10 +61,20 @@
             $videoContent = $result[0][0];
           }
 
-          $content = preg_split('/[\r\n]/', $body);
-          for ($i = 1, $len = count($content); $i < $len; $i++) {
-            $contentModel .= "<p>".$content[$i]."</p>";
-          }
+          $con = $body;
+					if (preg_match_all('/http:\/\/.*?\.(jpg|png|bmp|jpeg|gif)/', $article['content'], $matchs)) {
+						for ($i = 1, $len = count($matchs[0]); $i < $len; $i++) {
+							$imgurl = $matchs[0][$i];
+							$con = str_replace($imgurl,"<img src='$imgurl' />", $con);
+						}
+					}
+          
+					$content = preg_split('/[\r\n]/', $con);
+					$contentModel = "";
+					for ($i = 1, $len = count($content); $i < $len; $i++) {
+						$contentModel .= "<p>".$content[$i]."</p>";
+					}
+
           echo "<div class='p-course-video'>".$videoContent."</div>";
           echo "<div class='p-course-content'>".$contentModel."</div>";
         ?>
