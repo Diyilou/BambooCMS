@@ -433,6 +433,12 @@ body {
   background-color: $overall-color;
   p {
     color: $black3-color;
+    margin: 10px 0px;
+    line-height: 1.5;
+    text-align: justify;
+    img {
+      max-width: 900px;
+    }
   }
 }
 

@@ -62,13 +62,12 @@
           }
 
           $con = $body;
-					if (preg_match_all('/http:\/\/.*?\.(jpg|png|bmp|jpeg|gif)/', $article['content'], $matchs)) {
-						for ($i = 1, $len = count($matchs[0]); $i < $len; $i++) {
+					if (preg_match_all('/http:\/\/.*?\.(jpg|png|bmp|jpeg|gif)/', $con, $matchs)) {
+						for ($i = 0, $len = count($matchs[0]); $i < $len; $i++) {
 							$imgurl = $matchs[0][$i];
 							$con = str_replace($imgurl,"<img src='$imgurl' />", $con);
 						}
 					}
-          
 					$content = preg_split('/[\r\n]/', $con);
 					$contentModel = "";
 					for ($i = 1, $len = count($content); $i < $len; $i++) {
