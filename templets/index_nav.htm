@@ -40,7 +40,7 @@
               $navCon = $client -> getNavDetail($topid)['data'];
               $navHtml = "<ul>";
               for ($j = 0, $len1 = count($navCon); $j < $len1; $j++) {
-                $navHtml .= "<li><a title='".$navCon[$j]['title']."' target='_blank' rel='nofollow' href='".$navCon[$j]['redirecturl']."'><span>".$navCon[$j]['title']."</span><span>".$navCon[$i]['description']."</span></a></li>";
+                $navHtml .= "<li><a title='".$navCon[$j]['title']."' target='_blank' rel='nofollow' href='".$navCon[$j]['redirecturl']."'><span>".$navCon[$j]['title']."</span><span>".$navCon[$j]['description']."</span></a></li>";
               }
               $navHtml .= "</ul>";
               $html.= $navHtml."</li>";
