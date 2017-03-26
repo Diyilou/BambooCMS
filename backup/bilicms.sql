@@ -37,6 +37,7 @@ CREATE TABLE `bili_addonarticle` (
 
 LOCK TABLES `bili_addonarticle` WRITE;
 /*!40000 ALTER TABLE `bili_addonarticle` DISABLE KEYS */;
+INSERT INTO `bili_addonarticle` VALUES (1,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=o0359tlmecr&tiny=0&auto=0\" allowfullscreen></iframe>\n今天给大家先上一个基础视频教程吧\n用最简单的移动工具变形属性来制作图片无限循环的效果\n活生生把一张羞羞的图做的这么有意境，大声跟我喊口号\n“我们拒绝黄赌毒，我们意淫全世界！”\n看看其他的效果\n《框中世界》\nhttp://www.wanmeixiangsu.cn/upload/images/1490448779/shijie.jpg\n《框中人物》\nhttp://www.wanmeixiangsu.cn/upload/images/1490448793/renwu.jpg\n好了，意淫全世界的第一步从这里启程\n快来下载素材试试手吧~\n素材链接：http://pan.baidu.com/s/1pLg0KmJ\n',''),(2,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=s0364pbbvf9&tiny=0&auto=0\" allowfullscreen></iframe>\n新一波ps教学视频来啦！！！\n今天如上期教程中说的\n教大家大头娃娃的特效\n这不是一个基础的视频\n学好了可以撩妹子\n 当然也可以钓汉子\n视频接近1小时，请在有空有无线的时候观看思密达！\n像素君有点感冒，鼻音太重还请见谅\nhttp://www.wanmeixiangsu.cn/upload/images/1490449927/wawa.png\n制作素材像素君会放在云盘里，亲们自己下载\n链接：http://pan.baidu.com/s/1eSdwb2y 密码：kkv1',''),(3,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=w0366wu3xn7&tiny=0&auto=0\" allowfullscreen></iframe>\nps教学视频周末大放送啦\n今天来简单介绍一下基本工具中的选区工具\n因为是基础知识，所以会相对枯燥些\n不过基础知识比较重要\n所以没基础的同学耐心看完多练习\n下节课我们讲真正的抠图\n属于比较重要的部分\nhttp://www.wanmeixiangsu.cn/upload/images/1490450286/xuantu.jpg\n涉及到的快捷键有两个：\nctrl+D  取消选区\nctrl+shift+i   反向选择\n视频中用到的素材链接：\n链接：http://pan.baidu.com/s/1ge2M7qN\n密码：5bbe',''),(4,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=a0376yckmo7&tiny=0&auto=0\" allowfullscreen></iframe>\n没错，我们就要这样的效果\n快来看视频\n想直接看案例的同学可以快进到14分观看\nhttp://www.wanmeixiangsu.cn/upload/images/1490450688/haibao.png\n这里是我们这期教程的素材和源文件，大家下载练习吧\n链接：http://pan.baidu.com/s/1gfHrJfP 密码：2kvu',''),(5,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=u0378tnrys4&tiny=0&auto=0\" allowfullscreen></iframe>\nhttp://www.wanmeixiangsu.cn/upload/images/1490450977/tuzhang1.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490450984/tuzhang2.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490450991/tuzhang3.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490450997/tuzhang4.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490451007/tuzhang5.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490451013/tuzhang6.jpg\n素材下载链接：链接：http://pan.baidu.com/s/1pLCYd7d \n密码：rb0c',''),(6,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=w0383ei7o91&tiny=0&auto=0\" allowfullscreen></iframe>\nhttp://www.wanmeixiangsu.cn/upload/images/1490451416/lvjing_all.png\n01 \n首先打开你的ps软件，然后导入图片，右键选择智能化对象\n不要问我为什么要智能化对象，给我死记！\n其实智能化对象是为了保护原图层，重点是方便修改滤镜效果。\n毕竟这节课讲的凸出就是滤镜效果的一员。\n（在图片智能化对象的同时会自动生成一个蒙版，这个蒙版在后面大有用处。）\n02\n找到顶部菜单栏的滤镜，再从滤镜里面找到风格化，选择风格化里面的凸出。\n03\n大小设为6，深度设为60，确定即可。\n数值你可以自由设定，多试几遍，会有不同效果的。\nps数值是一个非常神奇的东西，差之毫厘谬以千里。\n\n还有些地方不太满意，在蒙版擦擦擦就好了。\n还不会的，多看几遍视频！祝成功~\n链接：http://pan.baidu.com/s/1jHXl2js \n密码：gq8i',''),(7,6,'<iframe frameborder=\"0\" width=\"640\" height=\"498\" src=\"https://v.qq.com/iframe/player.html?vid=a0385se4mnv&tiny=0&auto=0\" allowfullscreen></iframe>\nhttp://www.wanmeixiangsu.cn/upload/images/1490452137/1.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490452144/2.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490452155/3.jpg\nhttp://www.wanmeixiangsu.cn/upload/images/1490452162/4.jpg\n链接：http://pan.baidu.com/s/1dEFLrR7 \n密码：yvpy','');
 /*!40000 ALTER TABLE `bili_addonarticle` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +91,7 @@ CREATE TABLE `bili_admin` (
   `logintime` int(10) NOT NULL,
   `loginip` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +100,7 @@ CREATE TABLE `bili_admin` (
 
 LOCK TABLES `bili_admin` WRITE;
 /*!40000 ALTER TABLE `bili_admin` DISABLE KEYS */;
-INSERT INTO `bili_admin` VALUES (1,0,'BILIBILI','130e29f351572e58c49fd4c910d7beb0','super',NULL,'mnzmx_z@163.com','18014489610',NULL,20170310,NULL);
+INSERT INTO `bili_admin` VALUES (1,0,'BILIBILI','130e29f351572e58c49fd4c910d7beb0','super',NULL,'mnzmx_z@163.com','18014489610',NULL,20170310,NULL),(2,1,'BILI149044799435526NTY','e52c90a908c76df57d19d73830449ebe','辛浪',NULL,'1833482116@qq.com','',NULL,1490447994,NULL);
 /*!40000 ALTER TABLE `bili_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +127,7 @@ CREATE TABLE `bili_archives` (
   `keywords` char(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,6 +136,7 @@ CREATE TABLE `bili_archives` (
 
 LOCK TABLES `bili_archives` WRITE;
 /*!40000 ALTER TABLE `bili_archives` DISABLE KEYS */;
+INSERT INTO `bili_archives` VALUES (1,6,'p',6,NULL,3,'基础工具介绍+案例演示-ps基础教程第一课程','基础工具介绍','辛浪','','/../upload/images/1490448806/gongju.png',1490448811,'基础工具介绍+案例演示-ps基础教程第一课程','基础工具介绍+案例演示-ps基础教程第一课程'),(2,6,'',2,NULL,3,'大头娃娃特效制作-ps基础教程第二课','大头娃娃特效制作','辛浪','','/../upload/images/1490449927/wawa.png',1490449935,'大头娃娃特效制作-ps基础教程第二课','大头娃娃特效制作-ps基础教程第二课'),(3,6,'',7,NULL,3,'选区工具-ps基础教程第三课','选区工具','辛浪','','/../upload/images/1490450286/xuantu.jpg',1490450305,'选区工具-ps基础教程第三课','选区工具-ps基础教程第三课'),(4,6,'',2,NULL,3,'画笔工具+海报制作-ps基础教程第四课','画笔工具+海报制作','辛浪','','/../upload/images/1490450688/haibao.png',1490450695,'画笔工具+海报制作-ps基础教程第四课','画笔工具+海报制作-ps基础教程第四课'),(5,6,'',4,NULL,3,'图章工具-ps基础教程第五课','图章工具','辛浪','','/../upload/images/1490451013/tuzhang6.jpg',1490451073,'图章工具-ps基础教程第五课','图章工具-ps基础教程第五课'),(6,6,'',5,NULL,3,'滤镜凸出-ps基础教程第六课','滤镜凸出','辛浪','','/../upload/images/1490451435/lvjing.png',1490451541,'滤镜凸出-ps基础教程第六课','滤镜凸出-ps基础教程第六课'),(7,6,'',2,NULL,3,'艺术人像-ps基础教程第七课','艺术人像','辛浪','','/../upload/images/1490452174/sou.png',1490452178,'艺术人像-ps基础教程第七课','艺术人像-ps基础教程第七课');
 /*!40000 ALTER TABLE `bili_archives` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,7 +325,7 @@ CREATE TABLE `bili_taglist` (
   `typeid` smallint(5) NOT NULL,
   `tag` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,6 +334,7 @@ CREATE TABLE `bili_taglist` (
 
 LOCK TABLES `bili_taglist` WRITE;
 /*!40000 ALTER TABLE `bili_taglist` DISABLE KEYS */;
+INSERT INTO `bili_taglist` VALUES (1,1,6,'ps基础教程'),(2,2,6,'大头娃娃特效制作'),(3,3,6,'ps基础教程'),(4,4,6,'ps基础教程'),(5,5,6,'ps基础教程'),(6,6,6,'ps基础教程'),(7,7,6,'ps基础教程');
 /*!40000 ALTER TABLE `bili_taglist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -344,4 +347,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-25 13:05:46
+-- Dump completed on 2017-03-26  2:12:00
