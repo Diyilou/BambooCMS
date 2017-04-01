@@ -4,14 +4,13 @@
 
   // 文章页面
   if (isset($tag) && isset($aid)) {
-
-    if ($tag === 'wallpaper') {
-      include('../templets/article_wallpaper.htm');
+    if ($tag === 'find') {
+      include('../templets/article_find.htm');
       return;
     }
 
-    if ($tag === 'course') {
-      include('../templets/article_videos.htm');
+    if ($tag === 'store') {
+      include('../templets/article_store.htm');
       return;
     }
 
@@ -26,28 +25,13 @@
       return;
     }
 
-    if (preg_match('/wallpaper[\/]{0,1}/',$tag)) {
-      include('../templets/index_wallpaper.htm');
+    if (preg_match('/find[\/]{0,1}/',$tag)) {
+      include('../templets/index_find.htm');
       return;
     }
 
-    if (preg_match('/tools[\/]/',$tag)) {
-      include('../templets/index_tools.htm');
-      return;
-    }
-
-    if (preg_match('/shop[\/]/',$tag)) {
-      include('../templets/index_shop.htm');
-      return;
-    }
-
-    if (preg_match('/course[\/]/',$tag)) {
-      include('../templets/index_videos.htm');
-      return;
-    }
-
-    if (preg_match('/nav[\/]/',$tag)) {
-      include('../templets/index_nav.htm');
+    if (preg_match('/store[\/]/',$tag)) {
+      include('../templets/index_store.htm');
       return;
     }
 

@@ -1,19 +1,13 @@
 RewriteEngine on  RewriteCond % !^$
 
-RewriteRule ^(wallpaper)\/([0-9\_a-zA-Z]*).html$ /view/view.php?tag=$1&aid=$2
-RewriteRule ^(course)\/([0-9\_a-zA-Z]*).html$ /view/view.php?tag=$1&aid=$2
+RewriteRule ^(find)\/([0-9\_a-zA-Z]*).html$ /view/view.php?tag=$1&aid=$2
+RewriteRule ^(store)\/([0-9\_a-zA-Z]*).html$ /view/view.php?tag=$1&aid=$2
 
-RewriteRule ^(wallpaper[/]{0,1})$ /view/view.php?tag=$1
-RewriteRule ^(course[/]{0,1})$ /view/view.php?tag=$1
-RewriteRule ^(tools[/]{0,1})$ /view/view.php?tag=$1
-RewriteRule ^(shop[/]{0,1})$ /view/view.php?tag=$1
-RewriteRule ^(nav[/]{0,1})$ /view/view.php?tag=$1
+RewriteRule ^(find[/]{0,1})$ /view/view.php?tag=$1
+RewriteRule ^(store[/]{0,1})$ /view/view.php?tag=$1
 
-RewriteRule ^(wallpaper[/])index.html$ /view/view.php?tag=$1
-RewriteRule ^(course[/])index.html$ /view/view.php?tag=$1
-RewriteRule ^(tools[/])index.html$ /view/view.php?tag=$1
-RewriteRule ^(shop[/])index.html$ /view/view.php?tag=$1
-RewriteRule ^(nav[/])index.html$ /view/view.php?tag=$1
+RewriteRule ^(find[/])index.html$ /view/view.php?tag=$1
+RewriteRule ^(store[/])index.html$ /view/view.php?tag=$1
 
 RewriteRule ^([a-zA-Z]*)\.html /view/view.php?tag=$1
 

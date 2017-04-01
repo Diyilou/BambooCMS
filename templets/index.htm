@@ -2,79 +2,118 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>完美像素</title>
-    <meta name="keywords" content="设计视频教程,高清桌面壁纸,在线修图工具,设计师网址导航,完美像素" />
-    <meta name="description" content="完美像素：优秀设计师精心录制设计视频教程和各大设计软件教程，包含ps、ai、ae、pr、c4d、3dmax、maya等二维和三维软件视频教程，并提供在在线美图工具，设计师网址导航。" />
+    <title>半本手帐馆</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" type="text/css" href="/public/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/component.css" />
     <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
   </head>
   <body>
-    <header class="p-header">
+    <aside class="s-index-aside">
       <nav>
-        <a title="完美像素" href="/"><img src="/public/images/logo.png" alt="完美像素"></a>
         <ul>
-          <li><a title="首页推荐_完美像素" target="_blank" href="/">首页推荐</a></li>
-          <li><a title="视频教程_完美像素" target="_blank" href="/course/">视频教程</a></li>
-          <li><a title="精美壁纸免费下载_完美像素" target="_blank" href="/wallpaper/">精美壁纸</a></li>
-          <li><a title="美图工具_完美像素" target="_blank" href="/tools/">美图工具</a></li>
-          <li><a title="设计师网址导航_完美像素" target="_blank" href="/nav/">设计导航</a></li>
-        </ul>
-        <ul>
-          <li><a href='#'>注册</a></li>
-          <li><a href='#'>登录</a></li>
-          <li><input type='text' placeholder="search"></li>
+          <li><a href="/">半本</a></li>
+          <li><a href="/store/">胶带 Store</a></li>
+          <li><a href="/find/">发现</a></li>
+          <li><a href="/about/">我们</a></li>
         </ul>
       </nav>
-    </header>
-    <div class="p-banner">
-      <img src="/public/images/writersay.png" />
-    </div>
-    <section class="p-index-content">
-      <article>
-        <div>
-          <?php
-            require_once(dirname(__file__) . '/../route/data.client.php');
-            $client = new Client();
-            $result1 = $client -> getIndexVideosList();
-            $result1 = $result1['data'];
-
-            $vhtml = "";
-            for ($j = 0, $len1 = count($result1); $j < $len1; $j++) {
-              $litpic = $result1[$j]['litpic'];
-              $title = $result1[$j]['title'];
-              $id = $result1[$j]['id'];
-              $typedir = $result1[$j]['typedir'];
-              $pubdate = $result1[$j]['pubdate'];
-              $click = $result1[$j]['click'];
-              $vhtml .= "<div>";
-                $vhtml .= "<a target='_blank' title='$title' href='/course/".$id.".html'>";
-                $vhtml .= "<div>";
-                $vhtml .= "<img src='$litpic' />";
-                $vhtml .= "</div>";
-                $vhtml .= "<h3>$title</h3>";
-                $vhtml .= "</a>";
-                $vhtml .= "<span>";
-                $vhtml .= "<a href='javascript:void(0)'>".date("m-d",$pubdate)."</a>";
-                $vhtml .= "<a href='javascript:void(0)'>$click</a>";
-                $vhtml .= "</span>";
-              $vhtml .= "</div>";
-            }
-            echo $vhtml;
-          ?>
-        </div>
-      </article>
+    </aside>
+    <section class="s-index-shop">
+      <div class="grid">
+        <figure class="effect-milo">
+            <img src="/public/images/2.jpg" alt="img11"/>
+            <figcaption>
+                <h2>一木一横</h2>
+                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/3.jpg" alt="img11"/>
+            <figcaption>
+                <h2><span>￥35</span><span>33</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/4.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/5.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/6.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/7.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/8.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/9.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/10.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/11.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+        <figure class="effect-milo">
+            <img src="/public/images/12.jpg" alt="img11"/>
+            <figcaption>
+                <h2>Faithful <span>Milo</span></h2>
+                <p>Milo went to the woods. He took a fun ride and never came back.</p>
+                <a href="http://yusi123.com/" target="_blank">View more</a>
+            </figcaption>
+        </figure>
+      </div>
     </section>
-    <footer></footer>
     <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="/public/js/main.js"></script>
-    <script type="text/javascript">
-       $youziku.load("body", "8b9d7e972dea42d6b6292e82a5f4c501", "HiraginoGBW3");
-       $youziku.load("h1,h2,h3,h4,h5,h6", "8b9d7e972dea42d6b6292e82a5f4c501", "HiraginoGBW3");
-       $youziku.load("span,a,li", "8b9d7e972dea42d6b6292e82a5f4c501", "HiraginoGBW3");
-       $youziku.load("div", "8b9d7e972dea42d6b6292e82a5f4c501", "HiraginoGBW3");
-       /*$youziku.load("#id1,.class1,h1", "8b9d7e972dea42d6b6292e82a5f4c501", "HiraginoGBW3");*/
-       /*．．．*/
-       $youziku.draw();
-    </script>
   </body>
 </html>
