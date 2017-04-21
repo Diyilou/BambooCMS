@@ -1,0 +1,164 @@
+@import "_common";
+@import "_color";
+
+.business-container {
+  width: 100%;
+  height: auto;
+}
+
+.business-nav {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  overflow: hidden;
+  z-index: 100000;
+  padding: 8px 15px;
+  background-color: $bg-color;
+  border-bottom: solid 1px $blue-color;
+  > h1 {
+    display: inline-block;
+    font-weight: 100;
+    font-size: 16px;
+    > a {
+      color: $blue-color;
+    }
+  }
+  > ul {
+    float: right;
+    > li {
+      float: left;
+      margin-left: 15px;
+      > a {
+        color: $gray-color;
+        font-size: 15px;
+        &:hover {
+          color: $blue-color;
+        }
+      }
+      > span {
+        background-color: $blue-color;
+        color: $overall-color;
+        font-size: 13px;
+        padding: 3px 6px;
+        border: 3px;
+      }
+    }
+  }
+}
+.business-default {
+  margin: 15px;
+  > h1 {
+    font-size: 21px;
+    font-weight: 100;
+    color: $black-color;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px $border-color;
+    > a {
+      color: $blue-color;
+      font-size: 16px;
+      display: inline-block;
+      margin-left: 15px;
+    }
+  }
+  p {
+    font-size: 16px;
+    font-weight: 100;
+    color: $gray-color;
+    margin: 15px 0px;
+  }
+  > table {
+    width: 380px;
+    border: solid 1px $border-color;
+    th {
+      border-right: 1px $border-color solid;
+      border-bottom: 1px $border-color solid;
+      font-size: 15px;
+      color: $black-color;
+      font-weight: 100;
+      text-align: center;
+      padding: 2px 0px;
+    }
+    > thead {
+      > tr {
+        > th:last-child {
+          border-right: 0px;
+        }
+      }
+    }
+    td {
+      border-right: 1px solid $border-color;
+      border-bottom: solid 1px $border-color;
+      padding: 3px 10px;
+      color: $gray1-color;
+      font-size: 14px;
+      > a {
+        color: $blue-color;
+      }
+    }
+    > tbody > tr >td:nth-child(1) {
+      width: 80px;
+    }
+    > tbody > tr >td:last-child {
+      width: 300px;
+      border-right: 0px;
+    }
+    > tbody > tr:last-child {
+      > td {
+        border-bottom: 0px;
+      }
+    }
+  }
+}
+.business-slide {
+  position: fixed;
+  top: 40px;
+  left: 0px;
+  width: 135px;
+  bottom: 0px;
+  background-color: $bg1-color;
+  > li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    &:hover {
+      background-color: $bg2-color;
+    }
+    > a {
+      font-size: 15px;
+      display: block;
+      text-align: left;
+      color: $gray-color;
+      > i {
+        display: inline-block;
+        margin-right: 10px;
+        margin-left: 17px;
+        font-size: 15px;
+      }
+    }
+    &:nth-child(4) {
+      >a {
+        > i {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+.business-content {
+  position: absolute;
+  top: 40px;
+  left: 135px;
+  right: 0px;
+  height: auto;
+}
+
+@import "business/_column";
+@import "_shop";
+@import "_user";
+@import "_module";
+@import "_template";
+@import "_login";
+@import "_system";

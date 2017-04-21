@@ -3,6 +3,6 @@
         'servername' => 'localhost',
         'username' => 'root',
         'password' => 'zmx093032#',
-        'dbname' => 'bilicms'
+        'dbname' => 'shouzhangcom'
     );
 ?>

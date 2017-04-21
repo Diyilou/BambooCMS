@@ -47,7 +47,7 @@
 
     if (checkTypename($typename)) {
       $sql = "insert into bili_arctype (reid,ishidden,typename,typedir,templetindex,templetarticle,description,keywords,seotitle,content,type) values ($reid,$ishidden,'$typename','$typedir','$templetindex','$templetarticle','$description','$keywords','$seotitle','$content',$type)";
-
+      echo $sql;
       $result = $dutils -> insert($sql);
       if ($result['type'] == '1') {
         echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type']));

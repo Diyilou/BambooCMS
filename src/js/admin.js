@@ -18,6 +18,8 @@ import VideoAdd from '../jsx/VideoAdd.jsx';
 import User from '../jsx/User.jsx';
 import Admin from '../jsx/Admin.jsx';
 import AdminAdd from '../jsx/AdminAdd.jsx';
+import Member from '../jsx/Member.jsx';
+import MemberAdd from '../jsx/MemberAdd.jsx';
 
 import Module from '../jsx/Module.jsx';
 
@@ -72,6 +74,10 @@ if (userid !== '' && userid != null || !!userid !== false) {
           <Route path='/user' component={User}>
             <Route path='/user/admin' component={Admin}>
               <Route path='/user/admin/add' component={AdminAdd}>
+              </Route>
+            </Route>
+            <Route path='/user/member' component={Member}>
+              <Route path='/user/member/add' component={MemberAdd}>
               </Route>
             </Route>
           </Route>

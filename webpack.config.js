@@ -1,9 +1,13 @@
 var config = {
-   entry: './src/js/admin.js',
+   entry: {
+    'admin' : './src/js/admin.js',
+    'business' : './src/js/business.js'
+   },
 
    output: {
       path:'./public/js/',
-      filename: 'admin.js',
+      filename: '[name].js',
+      chunkFilename: '[name].js'
    },
 
    devServer: {
