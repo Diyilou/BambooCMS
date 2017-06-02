@@ -23,51 +23,68 @@
     </aside>
     <article class="s-goods-detail">
       <div class="s-goods-top">
-        <img src="/public/images/m4.png" />
-        <div>
-          <h1>花意 少女与花 水彩女孩花意 花意 少女与花 水彩女孩花意 </h1>
-          <ul>
-            <li>
-              <span>价格:</span>
-              <span>￥35.00</span>
-            </li>
-            <li>
-              <span>规格:</span>
-              <span>4.5cm*10m</span>
-            </li>
-            <li>
-              <span>材质:</span>
-              <span>和纸</span>
-            </li>
-            <li>
-              <span>品牌:</span>
-              <span>MOOD</span>
-            </li>
-            <li>
-              <span>商家:</span>
-              <span>爱丽丝茶会</span>
-            </li>
-          </ul>
+        <?php
+          global $body;
+          require_once(dirname(__file__) . '/../route/data.client.php');
+          $client = new Client();
+          $result = $client -> getShop($aid);
+          $result = $result['data'][0];
+          $title = $result['title'];
+          $litpic = $result['litpic'];
+          $trueprice = $result['trueprice'];
+          $keywords = $result['keywords'];
+          $description = $result['description'];
+          $brand = $result['brand'];
+          $writer = $result['writer'];
+          $uname = $client -> getShopUser($writer);
+          $uname = $uname['data'][0]['uname'];
+          $body = $result['body'];
+          echo "
+          <img src='$litpic' />
           <div>
-            <a href="#">加入心愿单</a>
-            <a href="#">立即购买</a>
+            <h1>$title</h1>
+            <ul>
+              <li>
+                <span>价格:</span>
+                <span>￥$trueprice</span>
+              </li>
+              <li>
+                <span>主题:</span>
+                <span>$keywords</span>
+              </li>
+              <li>
+                <span>风格:</span>
+                <span>$description</span>
+              </li>
+              <li>
+                <span>品牌:</span>
+                <span>$brand</span>
+              </li>
+              <li>
+                <span>商家:</span>
+                <span>$uname</span>
+              </li>
+            </ul>
+            <div>
+              <a href=''>加入心愿单</a>
+              <a href=''>立即购买</a>
+            </div>
           </div>
-        </div>
+          ";
+        ?>
       </div>
       <div class="s-goods-miaoshu">
-        <img src="/public/images/1.jpg" />
-        <img src="/public/images/2.jpg" />
-        <img src="/public/images/3.jpg" />
-        <img src="/public/images/4.jpg" />
-        <img src="/public/images/5.jpg" />
+        <?php
+          echo $body;
+        ?>
       </div>
-      <div class="s-goods-pinglun">
+      <!-- <div class="s-goods-pinglun">
         <h3>评论区</h3>
         <div class="s-goods-p-top">
           <textarea></textarea>
           <a href="">确认</a>
         </div>
-      </div>
+      </div> -->
     </article>
     <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="/public/js/main.js"></script>

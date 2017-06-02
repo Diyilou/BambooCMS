@@ -166,6 +166,7 @@
     $flag = $data['flag'];
     $channel = $data['channel'];
     $litpic = $data['litpic'];
+    $delta = addslashes($data['delta']);
     $pubdate = time();
     // 检查空字段
     if (!isset($title) || empty($title) ||
@@ -183,7 +184,7 @@
       $result = $dutils -> select($sql);
       if ($result['type'] == '4') {
         $aid = (int)$result['data'][0]['id'];
-        $sql = "insert into bili_addonarticle (aid,typeid,body,redirecturl) values ($aid, $typeid,'$body','$redirecturl')";
+        $sql = "insert into bili_addonarticle (aid,typeid,body,redirecturl,delta) values ($aid, $typeid,'$body','$redirecturl','$delta')";
         $result = $dutils -> insert($sql);
         if ($result['type'] == '1') {
           $sql = "insert into bili_taglist (aid,typeid,tag) values ($aid,$typeid,'$tag')";
@@ -288,7 +289,7 @@
   if (isset($_POST['type']) && $_POST['type'] == 'getarticledata') {
     $aid = $_POST['aid'];
     global $dutils;
-    $sql = "select a.id,a.title,a.shorttitle,a.writer,a.source,a.litpic,a.pubdate,a.keywords,a.description,a.flag,b.tag,c.redirecturl,c.body from (bili_archives a left join bili_taglist b on a.id=b.aid) left join bili_addonarticle c on a.id=c.aid where a.id=$aid";
+    $sql = "select a.id,a.title,a.shorttitle,a.writer,a.source,a.litpic,a.pubdate,a.keywords,a.description,a.flag,b.tag,c.redirecturl,c.body,c.delta from (bili_archives a left join bili_taglist b on a.id=b.aid) left join bili_addonarticle c on a.id=c.aid where a.id=$aid";
     $result = $dutils -> select($sql);
     if ($result['type'] == '4') {
       echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type'], 'data' => $result['data']));
@@ -313,6 +314,7 @@
     $body = $data['body'];
     $flag = $data['flag'];
     $litpic = $data['litpic'];
+    $delta = addslashes($data['delta']);
     $aid = $_POST['aid'];
 
     // 检查空字段
@@ -327,7 +329,7 @@
     $sql = "update bili_archives set litpic='$litpic',typeid=$typeid,flag='$flag',title='$title',shorttitle='$shorttitle',writer='$writer',source='$source',keywords='$keywords',description='$description' where id=$aid";
     $result = $dutils -> update($sql);
     if ($result['type'] == '5') {
-      $sql = "update bili_addonarticle set body='$body',redirecturl='$redirecturl' where aid=$aid";
+      $sql = "update bili_addonarticle set body='$body',delta='$delta',redirecturl='$redirecturl' where aid=$aid";
       $result = $dutils -> update($sql);
       if ($result['type'] == 5) {
         $sql = "update bili_taglist set tag='$tag' where aid=$aid";

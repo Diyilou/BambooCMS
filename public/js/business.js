@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 265);
+/******/ 	return __webpack_require__(__webpack_require__.s = 266);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -26542,7 +26542,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(7);
 
-var _Default = __webpack_require__(263);
+var _Default = __webpack_require__(264);
 
 var _Default2 = _interopRequireDefault(_Default);
 
@@ -26596,15 +26596,6 @@ var Nav = function (_React$Component) {
             null,
             _react2.default.createElement(
               'a',
-              { target: '_blank', href: this.props.basehost },
-              '\u7F51\u7AD9\u4E3B\u9875'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'a',
               { onClick: off, href: 'javascript:void(0)' },
               '\u6CE8\u9500'
             )
@@ -26646,16 +26637,6 @@ var Slide = function (_React$Component2) {
           null,
           _react2.default.createElement(
             _reactRouter.Link,
-            { to: '/column/all' },
-            _react2.default.createElement('i', { className: 'ion-android-folder-open' }),
-            '\u680F\u76EE\u7BA1\u7406'
-          )
-        ),
-        _react2.default.createElement(
-          'li',
-          null,
-          _react2.default.createElement(
-            _reactRouter.Link,
             { to: '/shop' },
             _react2.default.createElement('i', { className: 'ion-android-clipboard' }),
             '\u5546\u54C1\u7BA1\u7406'
@@ -26687,10 +26668,9 @@ var App = function (_React$Component3) {
     var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this3.state = {
-      basicData: {},
-      username: ''
+      username: '',
+      businessData: {}
     };
-    _this3.getBasicData = _this3.getBasicData.bind(_this3);
     _this3.getAmindName = _this3.getAmindName.bind(_this3);
     return _this3;
   }
@@ -26698,7 +26678,6 @@ var App = function (_React$Component3) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var getBasicData = this.getBasicData;
       var getAmindName = this.getAmindName;
 
       var userid = window.localStorage.getItem('businessuserid');
@@ -26708,30 +26687,13 @@ var App = function (_React$Component3) {
         data: { tag: 'bili', type: 'getmuserfromid', uid: userid },
         success: function success(data) {
           data = JSON.parse(data);
-          console.log(data);
           if (parseInt(data.status) == 1) {
             getAmindName(data.data);
           } else {
             alert('获得商家用户名失败');
+            window.localStorage.clear();
             window.location.href = '/business/';
             return;
-          }
-        },
-        error: function error(err) {
-          console.log(err);
-        }
-      });
-
-      $.ajax({
-        url: '/route/data.system.php',
-        method: 'post',
-        data: { tag: 'bili', type: 'getbasic' },
-        success: function success(data) {
-          data = JSON.parse(data);
-          if (parseInt(data.status) == 1) {
-            getBasicData(data.data);
-          } else {
-            alert('获取系统配置信息失败');
           }
         },
         error: function error(err) {
@@ -26742,18 +26704,10 @@ var App = function (_React$Component3) {
   }, {
     key: 'getAmindName',
     value: function getAmindName(data) {
-      console.log(data);
       window.localStorage.setItem('biliusername', data.uname);
       this.setState({
-        username: data.uname
-      });
-    }
-  }, {
-    key: 'getBasicData',
-    value: function getBasicData(data) {
-      console.log(data);
-      this.setState({
-        basicData: data
+        username: data.uname,
+        businessData: data
       });
     }
   }, {
@@ -26762,12 +26716,12 @@ var App = function (_React$Component3) {
       return _react2.default.createElement(
         'div',
         { className: 'business-container' },
-        _react2.default.createElement(Nav, { basehost: this.state.basicData.basehost, username: this.state.username }),
+        _react2.default.createElement(Nav, { username: this.state.username }),
         _react2.default.createElement(Slide, null),
         _react2.default.createElement(
           'div',
           { className: 'business-content' },
-          this.props.children == null ? _react2.default.createElement(_Default2.default, { basicData: this.state.basicData }) : this.props.children
+          this.props.children == null ? _react2.default.createElement(_Default2.default, { businessData: this.state.businessData }) : this.props.children
         )
       );
     }
@@ -27503,6 +27457,241 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var Message = function (_React$Component) {
+  _inherits(Message, _React$Component);
+
+  function Message() {
+    _classCallCheck(this, Message);
+
+    var _this = _possibleConstructorReturn(this, (Message.__proto__ || Object.getPrototypeOf(Message)).call(this));
+
+    _this.state = {
+      basicdata: ''
+    };
+    _this.createSystemBasic = _this.createSystemBasic.bind(_this);
+    _this.getBasicData = _this.getBasicData.bind(_this);
+    return _this;
+  }
+
+  _createClass(Message, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var getBasicData = this.getBasicData;
+
+      var userid = window.localStorage.getItem('businessuserid');
+      $.ajax({
+        url: '/route/data.user.php',
+        method: 'post',
+        data: { tag: 'bili', type: 'getmuserfromid', uid: userid },
+        success: function success(data) {
+          data = JSON.parse(data);
+          if (parseInt(data.status) == 1) {
+            getBasicData(data.data);
+          } else {
+            alert('获得商家用户名失败');
+            window.localStorage.clear();
+            window.location.href = '/business/';
+            return;
+          }
+        },
+        error: function error(err) {
+          console.log(err);
+        }
+      });
+    }
+  }, {
+    key: 'getBasicData',
+    value: function getBasicData(data) {
+      this.refs.tname.value = data.tname;
+      this.refs.uname.value = data.uname;
+      this.refs.phone.value = data.phone;
+      this.refs.email.value = data.email;
+    }
+  }, {
+    key: 'createSystemBasic',
+    value: function createSystemBasic() {
+
+      if (this.refs.tname.value === null || this.refs.tname.value === '') {
+        alert('用户名不能为空');
+        event.preventDefault();
+        return false;
+      }
+      if (this.refs.uname.value === null || this.refs.uname.value === '') {
+        alert('用户名不能为空');
+        event.preventDefault();
+        return false;
+      }
+      if (this.refs.phone.value === null || this.refs.phone.value === '') {
+        alert('电话不能为空');
+        event.preventDefault();
+        return false;
+      }
+      if (this.refs.email.value === null || this.refs.email.value === '') {
+        alert('邮箱不能为空');
+        event.preventDefault();
+        return false;
+      }
+
+      var userData = {
+        tname: this.refs.tname.value,
+        uname: this.refs.uname.value,
+        phone: this.refs.phone.value,
+        email: this.refs.email.value,
+        userid: window.localStorage.getItem('businessuserid')
+      };
+
+      $.ajax({
+        url: '/route/data.user.php',
+        method: 'post',
+        data: { tag: 'bili', type: 'updatemember', 'data': userData },
+        success: function success(data) {
+          data = JSON.parse(data);
+          if (parseInt(data.status) == 1) {
+            alert('修改成功');
+          } else {
+            alert(data.msg);
+          }
+        },
+        error: function error(err) {
+          console.log(err);
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var createSystemBasic = this.createSystemBasic;
+      return _react2.default.createElement(
+        'div',
+        { className: 'bili-system-basic' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          '\u5546\u5BB6\u4FE1\u606F\u4FEE\u6539'
+        ),
+        _react2.default.createElement(
+          'table',
+          { cellSpacing: '0' },
+          _react2.default.createElement(
+            'thead',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                null,
+                '\u53C2\u6570'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                '\u53C2\u6570\u503C'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'tbody',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u5546\u5BB6\u540D*'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement('input', { type: 'text', ref: 'tname' })
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u7528\u6237\u540D*'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement('input', { type: 'text', ref: 'uname' })
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u7535\u8BDD*'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement('input', { type: 'text', ref: 'phone' })
+              )
+            ),
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'td',
+                null,
+                '\u90AE\u7BB1*'
+              ),
+              _react2.default.createElement(
+                'td',
+                null,
+                _react2.default.createElement('input', { type: 'text', ref: 'email' })
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'a',
+          { onClick: createSystemBasic, href: 'javascript:void(0)' },
+          '\u786E\u8BA4'
+        )
+      );
+    }
+  }]);
+
+  return Message;
+}(_react2.default.Component);
+
+exports.default = Message;
+
+/***/ }),
+/* 261 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = __webpack_require__(7);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var ShopIndex = function (_React$Component) {
   _inherits(ShopIndex, _React$Component);
 
@@ -27511,35 +27700,30 @@ var ShopIndex = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ShopIndex.__proto__ || Object.getPrototypeOf(ShopIndex)).call(this));
 
-    console.log(JSON.parse(window.localStorage.getItem('columnarticle')));
     _this.state = {
-      columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前商品所属栏目
-      articlelist: []
+      shopdata: []
     };
-
-    _this.getColumnArticle = _this.getColumnArticle.bind(_this);
-    _this.addArticle = _this.addArticle.bind(_this);
+    _this.setShopData = _this.setShopData.bind(_this);
+    _this.updateShop = _this.updateShop.bind(_this);
+    _this.delShop = _this.delShop.bind(_this);
+    _this.addNewShop = _this.addNewShop.bind(_this);
     return _this;
   }
 
   _createClass(ShopIndex, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var getColumnArticle = this.getColumnArticle;
-      var id = this.state.columnarticle.id;
-
+      var setShopData = this.setShopData;
       $.ajax({
-        url: '/route/data.column.php',
+        url: '/route/data.business.php',
         method: 'post',
-        data: { tag: 'bili', type: 'allarticle', id: id },
+        data: { tag: 'bili', type: 'getallshop', 'userid': window.localStorage.getItem('businessuserid') },
         success: function success(data) {
           data = JSON.parse(data);
           if (parseInt(data.status) == 1) {
-            getColumnArticle(data.data);
-            console.log(data);
+            setShopData(data);
           } else {
-            console.log(data.msg);
-            //alert(data.msg);
+            alert(data.msg);
           }
         },
         error: function error(err) {
@@ -27547,33 +27731,35 @@ var ShopIndex = function (_React$Component) {
         }
       });
     }
-
-    // 获得当前栏目的文章
-
   }, {
-    key: 'getColumnArticle',
-    value: function getColumnArticle(data) {
-      console.log(data);
+    key: 'setShopData',
+    value: function setShopData(data) {
       this.setState({
-        articlelist: data
+        shopdata: data.data
       });
     }
   }, {
-    key: 'delArticle',
-    value: function delArticle(event) {
+    key: 'updateShop',
+    value: function updateShop(event) {
+      var ele = event.target || event.srcElement;
+      var aid = ele.getAttribute('data-aid');
+      window.localStorage.setItem('articlecontrols', JSON.stringify({ 'aid': aid, 'type': 'update' }));
+    }
+  }, {
+    key: 'delShop',
+    value: function delShop(event) {
       var ele = event.target || event.srcElement;
       var aid = ele.getAttribute('data-aid');
 
-      if (confirm('确定删除本商品？')) {
+      if (confirm('确定删除商品？')) {
         $.ajax({
-          url: '/route/data.column.php',
+          url: '/route/data.business.php',
           method: 'post',
           data: { tag: 'bili', type: 'delshop', aid: aid },
           success: function success(data) {
             data = JSON.parse(data);
             if (parseInt(data.status) == 1) {
               ele.parentNode.parentNode.remove();
-              console.log(data);
             } else {
               alert(data.msg);
             }
@@ -27585,59 +27771,26 @@ var ShopIndex = function (_React$Component) {
       }
     }
   }, {
-    key: 'updateArticle',
-    value: function updateArticle(event) {
-      var ele = event.target || event.srcElement;
-      var aid = ele.getAttribute('data-aid');
-      window.localStorage.setItem('articlecontrols', JSON.stringify({ 'aid': aid, 'type': 'update' }));
-    }
-  }, {
-    key: 'addArticle',
-    value: function addArticle(event) {
-      var columntype = parseInt(this.state.columnarticle.type);
-      window.localStorage.setItem('articlecontrols', JSON.stringify({ 'type': 'add', 'channel': columntype }));
+    key: 'addNewShop',
+    value: function addNewShop(event) {
+      window.localStorage.setItem('articlecontrols', JSON.stringify({ 'type': 'add' }));
     }
   }, {
     key: 'render',
     value: function render() {
-      var delArticle = this.delArticle;
-      var updateArticle = this.updateArticle;
-      var addArticle = this.addArticle;
-      var columntype = parseInt(this.state.columnarticle.type);
-      var addNewUrl = '';
-      if (columntype === 0) {
-        addNewUrl = '/column/article/add';
-      } else if (columntype === 1) {
-        addNewUrl = '/column/shop/add';
-      } else if (columntype === 2) {
-        addNewUrl = '/column/photo/add';
-      } else if (columntype === 3) {
-        addNewUrl = '/column/video/add';
-      }
+      var updateShop = this.updateShop;
+      var delShop = this.delShop;
+      var addNewShop = this.addNewShop;
       return _react2.default.createElement(
         'div',
-        { className: 'business-articleindex' },
+        { className: 'bili-articleindex' },
         _react2.default.createElement(
-          'ul',
-          { className: 'business-articlenav' },
+          'div',
+          null,
           _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              'span',
-              null,
-              '\u5F53\u524D\u680F\u76EE\uFF1A',
-              this.state.columnarticle.typename
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouter.Link,
-              { onClick: addArticle, to: addNewUrl },
-              '\u6DFB\u52A0\u65B0\u5546\u54C1'
-            )
+            _reactRouter.Link,
+            { to: 'shop/add', onClick: addNewShop },
+            '\u6DFB\u52A0\u5546\u54C1'
           )
         ),
         _react2.default.createElement(
@@ -27672,16 +27825,6 @@ var ShopIndex = function (_React$Component) {
               _react2.default.createElement(
                 'th',
                 null,
-                '\u70B9\u51FB'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
-                '\u53D1\u5E03\u4EBA'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
                 '\u64CD\u4F5C'
               )
             )
@@ -27689,7 +27832,7 @@ var ShopIndex = function (_React$Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            this.state.articlelist.map(function (item, index) {
+            this.state.shopdata.map(function (item, index) {
               return _react2.default.createElement(
                 'tr',
                 { key: index },
@@ -27699,7 +27842,7 @@ var ShopIndex = function (_React$Component) {
                   _react2.default.createElement(
                     'span',
                     null,
-                    item.id
+                    index
                   )
                 ),
                 _react2.default.createElement(
@@ -27712,7 +27855,7 @@ var ShopIndex = function (_React$Component) {
                   null,
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { 'data-aid': item.id, onClick: updateArticle, to: '/column/shop/update' },
+                    { 'data-aid': item.id, onClick: updateShop, to: '/shop/update' },
                     item.title
                   )
                 ),
@@ -27724,30 +27867,15 @@ var ShopIndex = function (_React$Component) {
                 _react2.default.createElement(
                   'td',
                   null,
-                  item.click
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
-                  item.writer
-                ),
-                _react2.default.createElement(
-                  'td',
-                  null,
                   _react2.default.createElement(
                     'a',
-                    { 'data-aid': item.id, onClick: delArticle, href: 'javascript:void(0)' },
+                    { 'data-aid': item.id, onClick: delShop, href: 'javascript:void(0)' },
                     '\u5220\u9664'
                   ),
                   _react2.default.createElement(
                     _reactRouter.Link,
-                    { 'data-aid': item.id, onClick: updateArticle, to: '/column/shop/update' },
+                    { 'data-aid': item.id, onClick: updateShop, to: '/shop/update' },
                     '\u66F4\u6539'
-                  ),
-                  _react2.default.createElement(
-                    'a',
-                    { href: '' },
-                    '\u6D4F\u89C8'
                   )
                 )
               );
@@ -27787,7 +27915,7 @@ var Shop = function (_React$Component2) {
 exports.default = Shop;
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27813,6 +27941,18 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var zhuti = ["人物", "动物", "植物", "风景", "旅行", "食物", "学习", "建筑", "天气", "英语字", "拉条", "纯色", "其他"];
+var fengge = ["可爱", "梦幻", "复古", "古风", "黑白", "写实", "简单", "华丽", "其他"];
+
+var isNumber = function isNumber(value) {
+  var patrn = /^(-)?\d+(\.\d+)?$/;
+  if (patrn.exec(value) == null || value == "") {
+    return false;
+  } else {
+    return true;
+  }
+};
+
 var ShopAdd = function (_React$Component) {
   _inherits(ShopAdd, _React$Component);
 
@@ -27822,43 +27962,37 @@ var ShopAdd = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (ShopAdd.__proto__ || Object.getPrototypeOf(ShopAdd)).call(this));
 
     _this.state = {
-      columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前文章所属栏目
-      imgsrc: '',
-      litpic: ''
+      litpic: '',
+      quill: '',
+      imgsrc: ''
     };
-    _this.postArticle = _this.postArticle.bind(_this);
+    _this.uploadImg = _this.uploadImg.bind(_this);
     _this.changeImgSrc = _this.changeImgSrc.bind(_this);
-    _this.changeLitpic = _this.changeLitpic.bind(_this);
+    _this.postArticle = _this.postArticle.bind(_this);
     _this.setArticle = _this.setArticle.bind(_this);
     return _this;
   }
 
   _createClass(ShopAdd, [{
-    key: 'changeImgSrc',
-    value: function changeImgSrc(data) {
-      this.setState({
-        imgsrc: data.url
-      });
-    }
-  }, {
-    key: 'changeLitpic',
-    value: function changeLitpic(data) {
-      this.setState({
-        litpic: data.url
-      });
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.refs.writer.value = window.localStorage.getItem('biliusername');
       var setArticle = this.setArticle;
+      this.setState({
+        quill: new Quill('#editor', {
+          modules: {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        })
+      });
+
       var articlecontrols = window.localStorage.getItem('articlecontrols');
       if (articlecontrols != '' && articlecontrols != null) {
         articlecontrols = JSON.parse(articlecontrols);
         if (articlecontrols.type === 'update') {
           var aid = parseInt(articlecontrols.aid);
           $.ajax({
-            url: '/route/data.column.php',
+            url: '/route/data.business.php',
             method: 'post',
             data: { tag: 'bili', type: 'getshopdata', aid: aid },
             success: function success(data) {
@@ -27877,54 +28011,31 @@ var ShopAdd = function (_React$Component) {
       }
     }
   }, {
+    key: 'changeImgSrc',
+    value: function changeImgSrc(data) {
+      this.setState({
+        imgsrc: data.url
+      });
+    }
+  }, {
     key: 'setArticle',
     value: function setArticle(data) {
-
       this.refs.title.value = data.title;
-      this.refs.shorttitle.value = data.shorttitle;
-      this.refs.tag.value = data.tag;
-      this.refs.redirecturl.value = data.redirecturl;
-      this.refs.source.value = data.source;
-      this.refs.keywords.value = data.keywords, this.refs.description.value = data.description;
-      this.refs.body.value = data.body;
-      this.refs.writer.value = data.writer;
       this.refs.price.value = data.price;
       this.refs.trueprice.value = data.trueprice;
-      this.refs.units.value = data.units;
       this.refs.brand.value = data.brand;
-
+      this.refs.redirecturl.value = data.redirecturl;
+      var delta = JSON.parse(data.delta);
+      this.state.quill.setContents(delta);
       this.setState({
-        litpic: data.litpic
+        imgsrc: data.litpic
       });
-
-      var flag = data.flag.split(',');
-      for (var i = 0, len = flag.length; i < len; i++) {
-        if (flag[i] === 'h') {
-          this.refs.articletype1.setAttribute('checked', 'checked');
-        } else if (flag[i] === 'c') {
-          this.refs.articletype2.setAttribute('checked', 'checked');
-        } else if (flag[i] === 'f') {
-          this.refs.articletype3.setAttribute('checked', 'checked');
-        } else if (flag[i] === 'a') {
-          this.refs.articletype4.setAttribute('checked', 'checked');
-        } else if (flag[i] === 's') {
-          this.refs.articletype5.setAttribute('checked', 'checked');
-        } else if (flag[i] === 'b') {
-          this.refs.articletype6.setAttribute('checked', 'checked');
-        } else if (flag[i] === 'p') {
-          this.refs.articletype7.setAttribute('checked', 'checked');
-        } else if (flag[i] === 'j') {
-          this.refs.articletype8.setAttribute('checked', 'checked');
-        }
-      }
-
-      console.log(data);
     }
   }, {
     key: 'uploadImg',
     value: function uploadImg(event) {
       var changeImgSrc = this.changeImgSrc;
-      var subData = new FormData(this.refs.subForm2);
+      var subData = new FormData(this.refs.subForm);
       $.ajax({
         type: "POST",
         url: "/route/data.upload.php",
@@ -27934,30 +28045,7 @@ var ShopAdd = function (_React$Component) {
         processData: false,
         success: function success(data) {
           data = JSON.parse(data);
-          console.log(data);
           changeImgSrc(data);
-        },
-        error: function error(XMLHttpRequest, textStatus, errorThrown) {
-          alert("上传失败，请检查网络后重试");
-        }
-      });
-    }
-  }, {
-    key: 'uploadLitpic',
-    value: function uploadLitpic(event) {
-      var changeLitpic = this.changeLitpic;
-      var subData = new FormData(this.refs.subForm1);
-      $.ajax({
-        type: "POST",
-        url: "/route/data.upload.php",
-        data: subData,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function success(data) {
-          data = JSON.parse(data);
-          console.log(data);
-          changeLitpic(data);
         },
         error: function error(XMLHttpRequest, textStatus, errorThrown) {
           alert("上传失败，请检查网络后重试");
@@ -27967,79 +28055,53 @@ var ShopAdd = function (_React$Component) {
   }, {
     key: 'postArticle',
     value: function postArticle(event) {
-      var ele = event.target || event.srcElement;
-      var columnarticle = ele.getAttribute('data-columnarticle');
-
-      if (columnarticle === '' || columnarticle === null) {
-        alert('请选择需要添加文章的栏目');
-        event.preventDefault();
-        return false;
-      }
       if (this.refs.title.value === '' || this.refs.title.value === null) {
-        alert('请填写文章标题');
-        event.preventDefault();
-        return false;
-      }
-      if (this.refs.keywords.value === '' || this.refs.keywords.value === null) {
-        alert('请填写关键字');
-        event.preventDefault();
-        return false;
-      }
-      if (this.refs.description.value === '' || this.refs.description.value === null) {
-        alert('请填写描述');
+        alert('请填写商品名');
         event.preventDefault();
         return false;
       }
 
-      var articletype = [];
-
-      if (this.refs.articletype1.checked) {
-        articletype.push(this.refs.articletype1.value);
-      }
-      if (this.refs.articletype2.checked) {
-        articletype.push(this.refs.articletype2.value);
-      }
-      if (this.refs.articletype3.checked) {
-        articletype.push(this.refs.articletype3.value);
-      }
-      if (this.refs.articletype4.checked) {
-        articletype.push(this.refs.articletype4.value);
-      }
-      if (this.refs.articletype5.checked) {
-        articletype.push(this.refs.articletype5.value);
-      }
-      if (this.refs.articletype6.checked) {
-        articletype.push(this.refs.articletype6.value);
-      }
-      if (this.refs.articletype7.checked) {
-        articletype.push(this.refs.articletype7.value);
-      }
-      if (this.refs.articletype8.checked) {
-        articletype.push(this.refs.articletype8.value);
+      if (!isNumber(this.refs.price.value) || !isNumber(this.refs.trueprice.value)) {
+        alert('价格不能为空或者非数字');
+        event.preventDefault();
+        return false;
       }
 
-      articletype = articletype.join(',');
-      console.log(articletype);
+      var qlContent = document.querySelector(".ql-editor").innerHTML;
+      var delta = this.state.quill.getContents();
+      delta = JSON.stringify(delta.ops).toString();
+
+      var zhuti = $(this.refs.zhutiMap).find("input:checked");
+      var fengge = $(this.refs.fenggeMap).find("input:checked");
+      var zhutiNew = [];
+      for (var i = 0, len = zhuti.length; i < len; i++) {
+        zhutiNew.push(zhuti[i].value);
+      }
+      var fenggeNew = [];
+      for (var i = 0, len = fengge.length; i < len; i++) {
+        fenggeNew.push(fengge[i].value);
+      }
+
       var sendData = {
-        typeid: JSON.parse(columnarticle).id,
+        typeid: '-100',
         title: this.refs.title.value,
-        shorttitle: this.refs.shorttitle.value,
-        tag: this.refs.tag.value,
+        shorttitle: '',
+        tag: '',
         redirecturl: this.refs.redirecturl.value,
-        source: this.refs.source.value,
-        writer: this.refs.writer.value,
-        keywords: this.refs.keywords.value,
-        description: this.refs.description.value,
-        body: this.refs.body.value,
-        flag: articletype,
-        litpic: this.state.litpic,
+        source: '',
+        writer: window.localStorage.getItem('businessuserid'),
+        keywords: zhutiNew.join(','),
+        description: fenggeNew.join(','),
+        body: qlContent,
+        delta: delta,
+        flag: '',
+        litpic: this.state.imgsrc,
         price: this.refs.price.value,
         trueprice: this.refs.trueprice.value,
-        units: this.refs.units.value,
-        brand: this.refs.brand.value
+        units: '',
+        brand: this.refs.brand.value,
+        channel: 1
       };
-
-      console.log(sendData);
 
       var articlecontrols = window.localStorage.getItem('articlecontrols');
 
@@ -28047,14 +28109,12 @@ var ShopAdd = function (_React$Component) {
         articlecontrols = JSON.parse(articlecontrols);
         if (articlecontrols.type === 'update') {
           $.ajax({
-            url: '/route/data.column.php',
+            url: '/route/data.business.php',
             method: 'post',
             data: { tag: 'bili', type: 'updateshop', 'data': sendData, 'aid': articlecontrols.aid },
             success: function success(data) {
-              console.log(data);
               data = JSON.parse(data);
               if (parseInt(data.status) == 1) {
-                console.log(data);
                 window.localStorage.setItem('articlecontrols', '[]');
               } else {
                 alert(data.msg);
@@ -28065,15 +28125,13 @@ var ShopAdd = function (_React$Component) {
             }
           });
         } else if (articlecontrols.type === 'add') {
-          sendData.channel = articlecontrols.channel;
           $.ajax({
-            url: '/route/data.column.php',
+            url: '/route/data.business.php',
             method: 'post',
             data: { tag: 'bili', type: 'addshop', 'data': sendData },
             success: function success(data) {
               data = JSON.parse(data);
               if (parseInt(data.status) == 1) {
-                console.log(data);
                 window.localStorage.setItem('articlecontrols', '[]');
               } else {
                 alert(data.msg);
@@ -28091,9 +28149,8 @@ var ShopAdd = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var postArticle = this.postArticle;
       var uploadImg = this.uploadImg;
-      var uploadLitpic = this.uploadLitpic;
+      var postArticle = this.postArticle;
       return _react2.default.createElement(
         'div',
         { className: 'business-articleadd' },
@@ -28105,14 +28162,9 @@ var ShopAdd = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/column/all' },
-              this.state.columnarticle.typename
+              { to: '/shop' },
+              '\u5546\u54C1\u5217\u8868'
             )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            '\u6DFB\u52A0\u5546\u54C1'
           )
         ),
         _react2.default.createElement(
@@ -28121,55 +28173,43 @@ var ShopAdd = function (_React$Component) {
           _react2.default.createElement(
             'span',
             null,
-            '\u6807\u9898*'
+            '\u5546\u54C1\u540D*'
           ),
           _react2.default.createElement('input', { ref: 'title', type: 'text' })
         ),
         _react2.default.createElement(
           'h3',
-          null,
+          { ref: 'zhutiMap' },
           _react2.default.createElement(
             'span',
             null,
-            '\u77ED\u6807\u9898'
+            '\u4E3B\u9898'
           ),
-          _react2.default.createElement('input', { ref: 'shorttitle', type: 'text' })
+          zhuti.map(function (item, index) {
+            return _react2.default.createElement(
+              'span',
+              { key: index },
+              _react2.default.createElement('input', { name: 'zhuti', value: item, type: 'checkbox' }),
+              item
+            );
+          })
         ),
         _react2.default.createElement(
           'h3',
-          null,
+          { ref: 'fenggeMap' },
           _react2.default.createElement(
             'span',
             null,
-            'Tag\u6807\u7B7E'
+            '\u98CE\u683C'
           ),
-          _react2.default.createElement('input', { ref: 'tag', type: 'text' }),
-          '(tag\u4F7F\u7528\u82F1\u6587\',\'\u5206\u9694)'
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          _react2.default.createElement(
-            'span',
-            null,
-            '\u81EA\u5B9A\u4E49\u5C5E\u6027'
-          ),
-          _react2.default.createElement('input', { ref: 'articletype1', name: 'articletype', value: 'h', type: 'checkbox' }),
-          '\u5934\u6761[h]',
-          _react2.default.createElement('input', { ref: 'articletype2', name: 'articletype', value: 'c', type: 'checkbox' }),
-          '\u63A8\u8350[c]',
-          _react2.default.createElement('input', { ref: 'articletype3', name: 'articletype', value: 'f', type: 'checkbox' }),
-          '\u5E7B\u706F[f]',
-          _react2.default.createElement('input', { ref: 'articletype4', name: 'articletype', value: 'a', type: 'checkbox' }),
-          '\u7279\u8350[a]',
-          _react2.default.createElement('input', { ref: 'articletype5', name: 'articletype', value: 's', type: 'checkbox' }),
-          '\u6EDA\u52A8[s]',
-          _react2.default.createElement('input', { ref: 'articletype6', name: 'articletype', value: 'b', type: 'checkbox' }),
-          '\u52A0\u7C97[b]',
-          _react2.default.createElement('input', { ref: 'articletype7', name: 'articletype', value: 'p', type: 'checkbox' }),
-          '\u56FE\u7247[p]',
-          _react2.default.createElement('input', { ref: 'articletype8', name: 'articletype', value: 'j', type: 'checkbox' }),
-          '\u8DF3\u8F6C[j]'
+          fengge.map(function (item, index) {
+            return _react2.default.createElement(
+              'span',
+              { key: index },
+              _react2.default.createElement('input', { name: 'fengge', value: item, type: 'checkbox' }),
+              item
+            );
+          })
         ),
         _react2.default.createElement(
           'h3',
@@ -28187,50 +28227,14 @@ var ShopAdd = function (_React$Component) {
           _react2.default.createElement(
             'span',
             null,
-            '\u6587\u7AE0\u6765\u6E90'
-          ),
-          _react2.default.createElement('input', { ref: 'source', type: 'text' }),
-          _react2.default.createElement(
-            'span',
-            null,
-            '\u4F5C\u8005'
-          ),
-          _react2.default.createElement('input', { ref: 'writer', type: 'text' })
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          _react2.default.createElement(
-            'span',
-            null,
-            '\u4E0A\u4F20\u7F29\u7565\u56FE'
+            '\u4E0A\u4F20\u56FE\u7247'
           ),
           _react2.default.createElement(
             'form',
-            { className: 'uploadimgform', name: 'form1', ref: 'subForm1', encType: 'multipart/form-data', method: 'post' },
-            _react2.default.createElement('input', { type: 'file', name: 'file', accept: 'image/jpg,image/jpeg,image/png,image/gif', onChange: uploadLitpic.bind(this) })
+            { className: 'uploadimgform', name: 'form2', ref: 'subForm', encType: 'multipart/form-data', method: 'post' },
+            _react2.default.createElement('input', { type: 'file', name: 'file', accept: 'image/jpg,image/jpeg,image/png,image/gif', onChange: uploadImg.bind(this) })
           ),
-          _react2.default.createElement('img', { src: this.state.litpic })
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          '\u5173\u952E\u5B57*'
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement('textarea', { ref: 'keywords' })
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          '\u63CF\u8FF0*'
-        ),
-        _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement('textarea', { ref: 'description' })
+          _react2.default.createElement('img', { src: this.state.imgsrc })
         ),
         _react2.default.createElement(
           'h3',
@@ -28238,24 +28242,9 @@ var ShopAdd = function (_React$Component) {
           '\u5185\u5BB9'
         ),
         _react2.default.createElement(
-          'h3',
-          null,
-          _react2.default.createElement(
-            'span',
-            null,
-            '\u4E0A\u4F20\u56FE\u7247'
-          ),
-          _react2.default.createElement(
-            'form',
-            { className: 'uploadimgform', name: 'form2', ref: 'subForm2', encType: 'multipart/form-data', method: 'post' },
-            _react2.default.createElement('input', { type: 'file', name: 'file', accept: 'image/jpg,image/jpeg,image/png,image/gif', onChange: uploadImg.bind(this) })
-          ),
-          _react2.default.createElement('img', { src: this.state.imgsrc })
-        ),
-        _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement('textarea', { ref: 'body' })
+          _react2.default.createElement('div', { id: 'editor', ref: 'body' })
         ),
         _react2.default.createElement(
           'h3',
@@ -28285,16 +28274,6 @@ var ShopAdd = function (_React$Component) {
           _react2.default.createElement(
             'span',
             null,
-            '\u8BA1\u91CF\u5355\u4F4D'
-          ),
-          _react2.default.createElement('input', { ref: 'units', type: 'text' })
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          _react2.default.createElement(
-            'span',
-            null,
             '\u54C1\u724C'
           ),
           _react2.default.createElement('input', { ref: 'brand', type: 'text' })
@@ -28304,7 +28283,7 @@ var ShopAdd = function (_React$Component) {
           null,
           _react2.default.createElement(
             _reactRouter.Link,
-            { 'data-columnarticle': JSON.stringify(this.state.columnarticle), onClick: postArticle, to: '/column/shop' },
+            { 'data-columnarticle': JSON.stringify(this.state.columnarticle), onClick: postArticle, to: '/shop' },
             '\u4FDD\u5B58'
           )
         )
@@ -28318,8 +28297,8 @@ var ShopAdd = function (_React$Component) {
 exports.default = ShopAdd;
 
 /***/ }),
-/* 262 */,
-/* 263 */
+/* 263 */,
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28351,44 +28330,12 @@ var Default = function (_React$Component) {
   function Default() {
     _classCallCheck(this, Default);
 
-    var _this = _possibleConstructorReturn(this, (Default.__proto__ || Object.getPrototypeOf(Default)).call(this));
-
-    _this.state = {
-      tongji: {}
-    };
-    _this.getBasicData = _this.getBasicData.bind(_this);
-    return _this;
+    return _possibleConstructorReturn(this, (Default.__proto__ || Object.getPrototypeOf(Default)).call(this));
   }
 
   _createClass(Default, [{
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      var getBasicData = this.getBasicData;
-      $.ajax({
-        url: '/route/data.get.php',
-        method: 'post',
-        data: { tag: 'bili', type: 'getindexdata' },
-        success: function success(data) {
-          data = JSON.parse(data);
-          if (parseInt(data.status, 10) === 1) {
-            getBasicData(data.data);
-          } else {
-            alert('获取系统配置信息失败');
-          }
-        },
-        error: function error(err) {
-          console.log(err);
-        }
-      });
-    }
-  }, {
-    key: 'getBasicData',
-    value: function getBasicData(data) {
-      console.log(data);
-      this.setState({
-        tongji: data
-      });
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'render',
     value: function render() {
@@ -28401,18 +28348,8 @@ var Default = function (_React$Component) {
           _react2.default.createElement(
             'span',
             null,
-            this.props.basicData.webname
-          ),
-          _react2.default.createElement(
-            'a',
-            { href: this.props.basicData.basehost, target: '_blank' },
-            this.props.basicData.basehost
+            this.props.businessData.tname
           )
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          this.props.basicData.description
         ),
         _react2.default.createElement(
           'table',
@@ -28426,7 +28363,7 @@ var Default = function (_React$Component) {
               _react2.default.createElement(
                 'th',
                 { colSpan: '2' },
-                '\u4FE1\u606F\u7EDF\u8BA1'
+                '\u57FA\u672C\u4FE1\u606F'
               )
             )
           ),
@@ -28444,7 +28381,7 @@ var Default = function (_React$Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                this.state.tongji.admin
+                this.props.businessData.uname
               )
             ),
             _react2.default.createElement(
@@ -28453,12 +28390,12 @@ var Default = function (_React$Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                '\u4F1A\u5458'
+                '\u7535\u8BDD'
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                this.state.tongji.member
+                this.props.businessData.phone
               )
             ),
             _react2.default.createElement(
@@ -28467,12 +28404,12 @@ var Default = function (_React$Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                '\u6587\u7AE0'
+                '\u90AE\u7BB1'
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                this.state.tongji.article
+                this.props.businessData.email
               )
             ),
             _react2.default.createElement(
@@ -28481,12 +28418,12 @@ var Default = function (_React$Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                '\u5546\u54C1'
+                '\u5546\u5BB6ID'
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                this.state.tongji.shop
+                this.props.businessData.userid
               )
             ),
             _react2.default.createElement(
@@ -28495,26 +28432,12 @@ var Default = function (_React$Component) {
               _react2.default.createElement(
                 'td',
                 null,
-                '\u56FE\u7247'
+                '\u6CE8\u518C\u65E5\u671F'
               ),
               _react2.default.createElement(
                 'td',
                 null,
-                this.state.tongji.photo
-              )
-            ),
-            _react2.default.createElement(
-              'tr',
-              null,
-              _react2.default.createElement(
-                'td',
-                null,
-                '\u89C6\u9891'
-              ),
-              _react2.default.createElement(
-                'td',
-                null,
-                this.state.tongji.video
+                Date(this.props.businessData.jointime)
               )
             )
           )
@@ -28529,8 +28452,8 @@ var Default = function (_React$Component) {
 exports.default = Default;
 
 /***/ }),
-/* 264 */,
-/* 265 */
+/* 265 */,
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28566,13 +28489,17 @@ var _ColumnAll = __webpack_require__(258);
 
 var _ColumnAll2 = _interopRequireDefault(_ColumnAll);
 
-var _Shop = __webpack_require__(260);
+var _Shop = __webpack_require__(261);
 
 var _Shop2 = _interopRequireDefault(_Shop);
 
-var _ShopAdd = __webpack_require__(261);
+var _ShopAdd = __webpack_require__(262);
 
 var _ShopAdd2 = _interopRequireDefault(_ShopAdd);
+
+var _Message = __webpack_require__(260);
+
+var _Message2 = _interopRequireDefault(_Message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28586,17 +28513,10 @@ if (userid !== '' && userid != null || !!userid !== false) {
       { path: '/', component: _App2.default },
       _react2.default.createElement(
         _reactRouter.Route,
-        { path: '/column', component: _Column2.default },
-        _react2.default.createElement(_reactRouter.Route, { path: '/column/addtop', component: _ColumnAddtop2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/column/addson', component: _ColumnAddtop2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/column/update', component: _ColumnAddtop2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/column/all', component: _ColumnAll2.default }),
-        _react2.default.createElement(
-          _reactRouter.Route,
-          { path: '/column/shop', component: _Shop2.default },
-          _react2.default.createElement(_reactRouter.Route, { path: '/column/shop/add', component: _ShopAdd2.default }),
-          _react2.default.createElement(_reactRouter.Route, { path: '/column/shop/update', component: _ShopAdd2.default })
-        )
+        { path: '/shop', component: _Shop2.default },
+        _react2.default.createElement(_reactRouter.Route, { path: '/shop/add', component: _ShopAdd2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/shop/update', component: _ShopAdd2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/message', component: _Message2.default })
       )
     )
   ), document.getElementById('app'));

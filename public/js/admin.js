@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 264);
+/******/ 	return __webpack_require__(__webpack_require__.s = 265);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -26928,7 +26928,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(7);
 
-var _Default = __webpack_require__(262);
+var _Default = __webpack_require__(263);
 
 var _Default2 = _interopRequireDefault(_Default);
 
@@ -27532,7 +27532,8 @@ var ArticleAdd = function (_React$Component) {
     _this.state = {
       columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前文章所属栏目
       imgsrc: '',
-      litpic: ''
+      litpic: '',
+      quill: ''
     };
     _this.postArticle = _this.postArticle.bind(_this);
     _this.changeImgSrc = _this.changeImgSrc.bind(_this);
@@ -27551,6 +27552,15 @@ var ArticleAdd = function (_React$Component) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+
+      this.setState({
+        quill: new Quill('#editor', {
+          modules: {
+            toolbar: toolbarOptions
+          },
+          theme: 'snow'
+        })
+      });
 
       this.refs.writer.value = window.localStorage.getItem('biliusername');
       var setArticle = this.setArticle;
@@ -27588,7 +27598,8 @@ var ArticleAdd = function (_React$Component) {
       this.refs.redirecturl.value = data.redirecturl;
       this.refs.source.value = data.source;
       this.refs.keywords.value = data.keywords, this.refs.description.value = data.description;
-      this.refs.body.value = data.body;
+      var delta = JSON.parse(data.delta);
+      this.state.quill.setContents(delta);
       this.refs.writer.value = data.writer;
       this.setState({
         litpic: data.litpic
@@ -27692,6 +27703,10 @@ var ArticleAdd = function (_React$Component) {
         articletype.push(this.refs.articletype8.value);
       }
 
+      var qlContent = document.querySelector(".ql-editor").innerHTML;
+      var delta = this.state.quill.getContents();
+      delta = JSON.stringify(delta.ops).toString();
+
       articletype = articletype.join(',');
       console.log(articletype);
       var sendData = {
@@ -27704,7 +27719,8 @@ var ArticleAdd = function (_React$Component) {
         writer: this.refs.writer.value,
         keywords: this.refs.keywords.value,
         description: this.refs.description.value,
-        body: this.refs.body.value,
+        body: qlContent,
+        delta: delta,
         flag: articletype,
         litpic: this.state.litpic
       };
@@ -27953,7 +27969,7 @@ var ArticleAdd = function (_React$Component) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement('textarea', { ref: 'body' })
+          _react2.default.createElement('div', { id: 'editor', ref: 'body' })
         ),
         _react2.default.createElement(
           'div',
@@ -32711,7 +32727,8 @@ exports.default = VideoAdd;
 /* 259 */,
 /* 260 */,
 /* 261 */,
-/* 262 */
+/* 262 */,
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32921,8 +32938,8 @@ var Default = function (_React$Component) {
 exports.default = Default;
 
 /***/ }),
-/* 263 */,
-/* 264 */
+/* 264 */,
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

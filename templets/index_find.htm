@@ -22,61 +22,35 @@
       </nav>
     </aside>
     <article class="s-find-article">
-      <div>
-        <a href="/find/1.html">
-          <h3>手帐类最畅销书籍《知日·手帐最高》电子版下载</h3>
-          <div>
-            <img src="/public/images/1.jpg" />
-          </div>
-          <p>
-            买了这本书看完了后，最大的用处就是拍照的时候当背景~~所以看看电子版就的就可以~~不过书籍的编排风格还是挺赞了
-          </p>
-        </a>
-      </div>
-      <div>
-        <a href="/find/1.html">
-          <h3>手帐类最畅销书籍《知日·手帐最高》电子版下载</h3>
-          <div>
-            <img src="/public/images/1.jpg" />
-          </div>
-          <p>
-            买了这本书看完了后，最大的用处就是拍照的时候当背景~~所以看看电子版就的就可以~~不过书籍的编排风格还是挺赞了
-          </p>
-        </a>
-      </div>
-      <div>
-        <a href="/find/1.html">
-          <h3>手帐类最畅销书籍《知日·手帐最高》电子版下载</h3>
-          <div>
-            <img src="/public/images/1.jpg" />
-          </div>
-          <p>
-            买了这本书看完了后，最大的用处就是拍照的时候当背景~~所以看看电子版就的就可以~~不过书籍的编排风格还是挺赞了
-          </p>
-        </a>
-      </div>
-      <div>
-        <a href="/find/1.html">
-          <h3>手帐类最畅销书籍《知日·手帐最高》电子版下载</h3>
-          <div>
-            <img src="/public/images/1.jpg" />
-          </div>
-          <p>
-            买了这本书看完了后，最大的用处就是拍照的时候当背景~~所以看看电子版就的就可以~~不过书籍的编排风格还是挺赞了
-          </p>
-        </a>
-      </div>
-      <div>
-        <a href="/find/1.html">
-          <h3>手帐类最畅销书籍《知日·手帐最高》电子版下载</h3>
-          <div>
-            <img src="/public/images/1.jpg" />
-          </div>
-          <p>
-            买了这本书看完了后，最大的用处就是拍照的时候当背景~~所以看看电子版就的就可以~~不过书籍的编排风格还是挺赞了
-          </p>
-        </a>
-      </div>
+      <?php
+        require_once(dirname(__file__) . '/../route/data.client.php');
+        $client = new Client();
+        $result = $client -> getRibaoArticleList(1);
+        $result = $result['data'];
+        $html = "";
+        for ($i = 0, $len = count($result); $i < $len; $i++) {
+          $aid = $result[$i]['id'];
+          $litpic = $result[$i]['litpic'];
+          $title = $result[$i]['title'];
+          $click = $result[$i]['click'];
+          $time = date("m-d",$result[$i]['pubdate']);
+          $html .= "
+            <div>
+              <a target='_blank' title='$title' href='/find/ribao_".$aid.".html'>
+                <h3>$title</h3>
+                <div>
+                  <img src='$litpic' />
+                </div>
+                <p>
+                  <span>浏览量：$click</span>
+                  <span>发布日期：$time</span>
+                </p>
+              </a>
+            </div>
+          ";
+        }
+        echo $html;
+      ?>
     </article>
     <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="/public/js/main.js"></script>

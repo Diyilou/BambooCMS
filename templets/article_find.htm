@@ -22,28 +22,83 @@
       </nav>
     </aside>
     <article class="s-find-content">
-      <div class="s-find-top">
-        <div>
-          <div class="s-time">
-            <span>Mar</span>
-            <span>24</span>
+      <?php
+        require_once(dirname(__file__) . '/../route/data.client.php');
+        $client = new Client();
+        $result = $client -> getRibaoArticle($aid);
+        $result = $result['data'][0];
+
+        $title = $result['title'];
+        $time = $result['pubdate'];
+        $click = $result['click'];
+        $body = $result['body'];
+        $writer = $result['writer'];
+
+        $M = date("m",$time);
+        $D = date("d",$time);
+
+        switch ($M) {
+          case '01':
+            $M = 'Jan';
+            break;
+          case '02':
+            $M = 'Feb';
+            break;
+          case '03':
+            $M = 'Mar';
+            break;
+          case '04':
+            $M = 'Apr';
+            break;
+          case '05':
+            $M = 'May';
+            break;
+          case '06':
+            $M = 'Jun';
+            break;
+          case '07':
+            $M = 'Jul';
+            break;
+          case '08':
+            $M = 'Aug';
+            break;
+          case '09':
+            $M = 'Sep';
+            break;
+          case '10':
+            $M = 'Oct';
+            break;
+          case '11':
+            $M = 'Nov';
+            break;
+          case '12':
+            $M = 'Dec';
+            break;
+          default:
+            break;
+        }
+        echo "
+          <div class='s-find-top'>
+            <div>
+              <div class='s-time'>
+                <span>$M</span>
+                <span>$D</span>
+              </div>
+              <h1>$title</h1>
+            </div>
+            <div>
+              <span>$writer</span>
+              <span>点击量：$click</span>
+              <span>评论：2</span>
+            </div>
           </div>
-          <h1>手帐类最畅销书籍《知日·手帐最高》</h1>
-        </div>
-        <div>
-          <span>管管</span>
-          <span>点击量：33</span>
-          <span>评论：2</span>
-        </div>
-      </div>
-      <div class="s-find-body">
-        <img src="/public/images/1.jpg">
-        <p>《知日·手帐最高》是手帐类最畅销的书籍之一，这个电子版给手帐路上的坑友们做一个参考。
-本资料来自网络收集，仅供内部下载交流学习，
-        </p>
-      </div>
+          <div class='s-find-body'>
+            $body
+          </div>
+        "
+      ?>
       <div class="s-find-pinlun">
-        <div class="s-find-input">
+        <!-- <div class="s-find-input">
           <div>
             <span>昵称</span>
             <input type="text" />
@@ -53,8 +108,13 @@
             <textarea></textarea>
           </div>
           <a href="#">确定</a>
-        </div>
+        </div> -->
       </div>
+      <?php
+        require_once(dirname(__file__) . '/../route/data.client.php');
+        $client = new Client();
+        $result = $client -> changeClickData($aid);
+      ?>
     </article>
     <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="/public/js/main.js"></script>

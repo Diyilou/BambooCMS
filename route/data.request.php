@@ -7,20 +7,22 @@
   require_once(dirname(__file__) . '/../utils/db.php');
   $dutils = new DUtils();
 
-  if (isset($_POST['type']) && $_POST['type'] == 'changeclickdata') {
+  if (isset($_POST['type']) && $_POST['type'] == 'changesearch') {
 
-    if (isset($_POST['aid']) && !empty($_POST['aid']) && is_numeric($_POST['aid'])) {
+    $z = $_POST['z'];
+    $f = $_POST['f'];
+    $p = $_POST['p'];
 
-      $aid = $_POST['aid'];
+    $sql = "select a.title,b.price,a.litpic,a.id,b.trueprice,b.brand from bili_archives a left join bili_addonshop b on a.id=b.aid where ".($p == '' || $p == '全部' ? '' : "b.brand='$p'").($z == '' || $z == '全部' ? '' : " and a.keywords like '%$z%'").($f == '' || $f == '全部' ? '' : " and a.description like '%$f%' ")."order by pubdate desc limit 20";
 
-      $sql = "update bili_archives set click=click+1 where id=$aid";
-      $result = $dutils -> update($sql);
-      if ($result['type'] == '5') {
-        echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type']));
-        return;
-      }
-      echo json_encode(array('status' => 0, 'msg' => $result['statement'], 'errno' => $result['type']));
+    $result = $dutils -> select($sql);
+    echo $sql;
+    if ($result['type'] == '4') {
+      echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type'], 'data' => $result));
       return;
     }
+
+    echo json_encode(array('status' => 0, 'msg' => $result['statement'], 'errno' => $result['type']));
+    return;
   }
 ?>

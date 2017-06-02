@@ -7,7 +7,8 @@ class ArticleAdd extends React.Component {
     this.state = {
       columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前文章所属栏目
       imgsrc: '',
-      litpic: ''
+      litpic: '',
+      quill: ''
     }
     this.postArticle = this.postArticle.bind(this);
     this.changeImgSrc = this.changeImgSrc.bind(this);
@@ -22,6 +23,15 @@ class ArticleAdd extends React.Component {
 	}
 
   componentDidMount () {
+
+    this.setState({
+      quill: new Quill('#editor', {
+        modules: {
+          toolbar: toolbarOptions
+        },
+        theme: 'snow'
+      })
+    });
 
     this.refs.writer.value = window.localStorage.getItem('biliusername');
     var setArticle = this.setArticle;
@@ -59,7 +69,8 @@ class ArticleAdd extends React.Component {
     this.refs.source.value = data.source;
     this.refs.keywords.value = data.keywords,
     this.refs.description.value = data.description;
-    this.refs.body.value = data.body;
+    var delta = JSON.parse(data.delta);
+    this.state.quill.setContents(delta);
     this.refs.writer.value = data.writer;
     this.setState({
       litpic: data.litpic
@@ -161,6 +172,9 @@ class ArticleAdd extends React.Component {
       articletype.push(this.refs.articletype8.value);
     }
 
+    var qlContent = document.querySelector(".ql-editor").innerHTML;
+    var delta = this.state.quill.getContents();
+    delta = JSON.stringify(delta.ops).toString();
 
     articletype = articletype.join(',');
     console.log(articletype);
@@ -174,7 +188,8 @@ class ArticleAdd extends React.Component {
         writer: this.refs.writer.value,
         keywords: this.refs.keywords.value,
         description: this.refs.description.value,
-        body: this.refs.body.value,
+        body: qlContent,
+        delta: delta,
         flag: articletype,
         litpic: this.state.litpic
     }
@@ -308,7 +323,8 @@ class ArticleAdd extends React.Component {
           <img src={this.state.imgsrc} />
         </h3>
         <div>
-          <textarea ref='body'></textarea>
+          <div id="editor" ref="body">
+          </div>
         </div>
         <div>
           <Link data-columnarticle={JSON.stringify(this.state.columnarticle)} onClick={postArticle} to='/column/article'>保存</Link>

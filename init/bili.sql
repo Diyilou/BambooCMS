@@ -51,6 +51,7 @@ CREATE TABLE `bili_addonarticle` (
   `aid` mediumint(8) NOT NULL, -- 文章id
   `typeid` smallint(5) NOT NULL, -- 文章所属栏目
   `body` text NOT  NULL, -- 内容
+  `delta` text DEFAULT  NULL, -- 使用editor之后保存数据格式
   `redirecturl` varchar(255) DEFAULT NULL, -- 重定向的路径
   PRIMARY KEY (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -65,6 +66,7 @@ CREATE TABLE `bili_addonshop` (
   `aid` mediumint(8) NOT NULL, -- 商品id
   `typeid` smallint(5) NOT NULL, -- 商品所属栏目
   `body` text NOT  NULL, -- 内容
+  `delta` text DEFAULT NULL, -- 使用editor之后保存数据格式
   `price` float NOT NULL, -- 优惠价
   `trueprice` float NOT NULL, -- 原价
   `brand` varchar(255) DEFAULT NULL, -- 品牌
@@ -115,24 +117,24 @@ DROP TABLE IF EXISTS `bili_member`; -- 普通会员用户
 
 CREATE TABLE `bili_member` (
   `mid` mediumint(8) NOT NULL AUTO_INCREMENT, -- 文章id
-  `mtype` varchar(20) NOT NULL, --
-  `userid` char(30) NOT NULL, --
-  `pwd` char(32) NOT NULL, --
-  `uname` char(20) NOT NULL, --
-  `tname` char(30) DEFAULT NULL, --
-  `sex` char(10) DEFAULT NULL, --
-  `rank` smallint(5) DEFAULT NULL, --
-  `uptime` int(11) NOT NULL, --
-  `exptime` smallint(6) DEFAULT NULL, --
-  `money` mediumint(8) DEFAULT NULL, --
-  `email` char(50) NOT NULL, --
-  `address` char(50) DEFAULT NULL, --
-  `phone` char(50) DEFAULT NULL, --
-  `scores` mediumint(8) DEFAULT NULL, --
-  `face` char(50) DEFAULT NULL, --
-  `jointime` int(10) DEFAULT NULL, --
-  `joinip` char(16) DEFAULT NULL, --
-  `loginip` char(16) DEFAULT NULL, --
+  `mtype` varchar(20) NOT NULL, -- 文章所属栏目
+  `userid` char(30) NOT NULL, -- 文章属性
+  `pwd` char(32) NOT NULL, -- 点击量
+  `uname` char(20) NOT NULL, -- 标题
+  `tname` char(30) DEFAULT NULL, -- 短标题
+  `sex` char(10) DEFAULT NULL, -- 作者
+  `rank` smallint(5) DEFAULT NULL, -- 源文件
+  `uptime` int(11) NOT NULL, -- 缩略图
+  `exptime` smallint(6) DEFAULT NULL, -- 更新时间
+  `money` mediumint(8) DEFAULT NULL, -- 关键词
+  `email` char(50) NOT NULL, -- 标题
+  `address` char(50) DEFAULT NULL, -- 标题
+  `phone` char(50) DEFAULT NULL, -- 短标题
+  `scores` mediumint(8) DEFAULT NULL, -- 作者
+  `face` char(50) DEFAULT NULL, -- 源文件
+  `jointime` int(10) DEFAULT NULL, -- 缩略图
+  `joinip` char(16) DEFAULT NULL, -- 更新时间
+  `loginip` char(16) DEFAULT NULL, -- 关键词
   PRIMARY KEY (`mid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

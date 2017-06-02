@@ -4,68 +4,37 @@ import {Router, Route, Link} from 'react-router';
 class Default extends React.Component {
   constructor () {
     super();
-    this.state = {
-      tongji: {}
-    }
-    this.getBasicData = this.getBasicData.bind(this);
   }
 
   componentDidMount () {
-    var getBasicData = this.getBasicData;
-    $.ajax({
-      url: '/route/data.get.php',
-      method: 'post',
-      data: {tag: 'bili', type: 'getindexdata'},
-        success: function (data) {
-          data = JSON.parse(data);
-          if (parseInt(data.status, 10) === 1) {
-            getBasicData(data.data);
-          } else {
-            alert('获取系统配置信息失败');
-          }
-        },
-        error: function (err) {
-          console.log(err);
-        }
-    });
-  }
 
-  getBasicData (data) {
-    console.log(data);
-    this.setState({
-      tongji: data
-    });
   }
 
   render () {
     return (
       <div className='business-default'>
-        <h1><span>{this.props.basicData.webname}</span><a href={this.props.basicData.basehost} target='_blank'>{this.props.basicData.basehost}</a></h1>
-        <p>{this.props.basicData.description}</p>
+        <h1><span>{this.props.businessData.tname}</span></h1>
         <table cellSpacing="0">
           <thead>
             <tr>
-              <th colSpan='2'>信息统计</th>
+              <th colSpan='2'>基本信息</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>管理员</td><td>{this.state.tongji.admin}</td>
+              <td>管理员</td><td>{this.props.businessData.uname}</td>
             </tr>
             <tr>
-              <td>会员</td><td>{this.state.tongji.member}</td>
+              <td>电话</td><td>{this.props.businessData.phone}</td>
             </tr>
             <tr>
-              <td>文章</td><td>{this.state.tongji.article}</td>
+              <td>邮箱</td><td>{this.props.businessData.email}</td>
             </tr>
             <tr>
-              <td>商品</td><td>{this.state.tongji.shop}</td>
+              <td>商家ID</td><td>{this.props.businessData.userid}</td>
             </tr>
             <tr>
-              <td>图片</td><td>{this.state.tongji.photo}</td>
-            </tr>
-            <tr>
-              <td>视频</td><td>{this.state.tongji.video}</td>
+              <td>注册日期</td><td>{Date(this.props.businessData.jointime)}</td>
             </tr>
           </tbody>
         </table>

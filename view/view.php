@@ -5,7 +5,12 @@
   // 文章页面
   if (isset($tag) && isset($aid)) {
     if ($tag === 'find') {
-      include('../templets/article_find.htm');
+      $aid = explode('_', $aid);
+      if ($aid[0] === 'ribao') {
+        $aid = $aid[1];
+        include('../templets/article_find.htm');
+        return;
+      }
       return;
     }
 

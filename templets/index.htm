@@ -23,94 +23,30 @@
     </aside>
     <section class="s-index-shop">
       <div class="grid">
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
-        <figure class="effect-milo">
-            <img src="/public/images/2.jpg" alt="img11"/>
-            <figcaption>
-                <h2>一木一横</h2>
-                <p>花意 少女与花 水彩女孩花意养花花意 少女与花 水彩女孩花意养花</p>
-                <a href="/store/1.html" target="_blank">View more</a>
-            </figcaption>
-        </figure>
+        <?php
+          require_once(dirname(__file__) . '/../route/data.client.php');
+          $client = new Client();
+          $result = $client -> getIndexShop();
+          $result = $result['data'];
+          $html = "";
+          for ($i = 0, $len = count($result); $i < $len; $i++) {
+            $brand = $result[$i]['brand'];
+            $title = $result[$i]['title'];
+            $litpic = $result[$i]['litpic'];
+            $aid = $result[$i]['id'];
+            $html .= "
+              <figure class='effect-milo'>
+                  <img src='$litpic'/>
+                  <figcaption>
+                      <h2>$brand</h2>
+                      <p>$title</p>
+                      <a title='$title' href='/store/".$aid.".html' target='_blank'>View more</a>
+                  </figcaption>
+              </figure>
+            ";
+          }
+          echo $html;
+        ?>
       </div>
     </section>
     <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>

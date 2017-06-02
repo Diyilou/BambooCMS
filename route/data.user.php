@@ -88,6 +88,34 @@
     return;
   }
 
+  if (isset($_POST['type']) && $_POST['type'] == 'updatemember') {
+    $data = $_POST['data'];
+
+    $tname = $data['tname'];
+    $uname = $data['uname'];
+    $email = $data['email'];
+    $phone = $data['phone'];
+    $userid = $data['userid'];
+
+    // 检查空字段
+    if (!isset($uname) || empty($uname) ||
+        !isset($phone) || empty($phone) ||
+        !isset($tname) || empty($tname) ||
+        !isset($email) || empty($email)) {
+          echo json_encode(array('status' => 0, 'msg' => '商家信息的必填字段不能为空', 'errno' => '0'));
+          return;
+    }
+
+    $sql = "update bili_member set tname='$tname',uname='$uname',phone='$phone',email='$email' where md5(userid)='$userid'";
+    $result = $dutils -> update($sql);
+    if ($result['type'] == '5') {
+      echo json_encode(array('status' => 1, 'msg' => $result['statement'], 'errno' => $result['type']));
+      return;
+    }
+    echo json_encode(array('status' => 0, 'msg' => $result['statement'], 'errno' => $result['type']));
+    return;
+  }
+
   if (isset($_POST['type']) && $_POST['type'] == 'alladmin') {
     global $dutils;
     $sql = "select * from bili_admin where usertype=1";
@@ -141,7 +169,7 @@
   if (isset($_POST['type']) && $_POST['type'] == 'getmuserfromid') {
     $uid = $_POST['uid'];
     global $dutils;
-    $sql = "select uname,mtype,userid from bili_member";
+    $sql = "select * from bili_member";
     $result = $dutils -> select($sql);
     if ($result['type'] == '4') {
       $data = $result['data'];

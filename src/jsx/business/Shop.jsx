@@ -4,32 +4,27 @@ import {Router, Route, Link} from 'react-router';
 class ShopIndex extends React.Component {
   constructor () {
     super();
-    console.log(JSON.parse(window.localStorage.getItem('columnarticle')));
     this.state = {
-      columnarticle: JSON.parse(window.localStorage.getItem('columnarticle')), // 当前商品所属栏目
-      articlelist : []
+      shopdata:[]
     }
-
-    this.getColumnArticle = this.getColumnArticle.bind(this);
-    this.addArticle = this.addArticle.bind(this);
+    this.setShopData = this.setShopData.bind(this);
+    this.updateShop = this.updateShop.bind(this);
+    this.delShop = this.delShop.bind(this);
+    this.addNewShop = this.addNewShop.bind(this);
   }
 
   componentDidMount () {
-    var getColumnArticle = this.getColumnArticle;
-    var id = this.state.columnarticle.id;
-
+    var setShopData = this.setShopData;
     $.ajax({
-      url: '/route/data.column.php',
+      url: '/route/data.business.php',
       method: 'post',
-      data: {tag: 'bili', type: 'allarticle', id: id},
+      data: {tag: 'bili', type: 'getallshop', 'userid': window.localStorage.getItem('businessuserid')},
         success: function (data) {
           data = JSON.parse(data);
           if (parseInt(data.status) == 1) {
-            getColumnArticle(data.data);
-            console.log(data);
+            setShopData(data);
           } else {
-            console.log(data.msg);
-            //alert(data.msg);
+            alert(data.msg);
           }
         },
         error: function (err) {
@@ -38,28 +33,31 @@ class ShopIndex extends React.Component {
     });
   }
 
-  // 获得当前栏目的文章
-  getColumnArticle (data) {
-    console.log(data);
+  setShopData (data) {
     this.setState({
-      articlelist: data
+      shopdata: data.data
     });
   }
 
-  delArticle (event) {
+  updateShop (event) {
+    var ele = event.target || event.srcElement;
+    var aid = ele.getAttribute('data-aid');
+    window.localStorage.setItem('articlecontrols',JSON.stringify({'aid':aid,'type':'update'}));
+  }
+
+  delShop (event) {
     var ele = event.target || event.srcElement;
     var aid = ele.getAttribute('data-aid');
 
-    if (confirm('确定删除本商品？')) {
+    if (confirm('确定删除商品？')) {
       $.ajax({
-        url: '/route/data.column.php',
+        url: '/route/data.business.php',
         method: 'post',
         data: {tag: 'bili', type: 'delshop', aid: aid},
           success: function (data) {
             data = JSON.parse(data);
             if (parseInt(data.status) == 1) {
               ele.parentNode.parentNode.remove();
-              console.log(data);
             } else {
               alert(data.msg);
             }
@@ -71,36 +69,19 @@ class ShopIndex extends React.Component {
     }
   }
 
-  updateArticle (event) {
-    var ele = event.target || event.srcElement;
-    var aid = ele.getAttribute('data-aid');
-    window.localStorage.setItem('articlecontrols',JSON.stringify({'aid':aid,'type':'update'}));
+  addNewShop (event) {
+    window.localStorage.setItem('articlecontrols',JSON.stringify({'type':'add'}));
   }
-  addArticle (event) {
-    var columntype = parseInt(this.state.columnarticle.type);
-    window.localStorage.setItem('articlecontrols',JSON.stringify({'type':'add','channel': columntype}));
-  }
+
   render () {
-    var delArticle = this.delArticle;
-    var updateArticle = this.updateArticle;
-    var addArticle = this.addArticle;
-    var columntype = parseInt(this.state.columnarticle.type);
-    var addNewUrl = '';
-    if (columntype === 0) {
-      addNewUrl = '/column/article/add';
-    }else if (columntype === 1) {
-      addNewUrl = '/column/shop/add';
-    }else if (columntype === 2) {
-      addNewUrl = '/column/photo/add';
-    }else if (columntype === 3) {
-      addNewUrl = '/column/video/add';
-    }
+    var updateShop = this.updateShop;
+    var delShop = this.delShop;
+    var addNewShop = this.addNewShop;
     return (
-      <div className='business-articleindex'>
-        <ul className='business-articlenav'>
-          <li><span>当前栏目：{this.state.columnarticle.typename}</span></li>
-          <li><Link onClick={addArticle} to={addNewUrl}>添加新商品</Link></li>
-        </ul>
+      <div className='bili-articleindex'>
+        <div>
+          <Link to='shop/add' onClick={addNewShop}>添加商品</Link>
+        </div>
         <table cellSpacing='0'>
           <thead>
             <tr>
@@ -108,25 +89,20 @@ class ShopIndex extends React.Component {
               <th>选择</th>
               <th>标题</th>
               <th>更新时间</th>
-              <th>点击</th>
-              <th>发布人</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
             {
-              this.state.articlelist.map(function (item, index) {
+              this.state.shopdata.map(function (item, index) {
                 return <tr key={index}>
-                  <td><span>{item.id}</span></td>
+                  <td><span>{index}</span></td>
                   <td><input type='checkbox' /></td>
-                  <td><Link data-aid={item.id} onClick={updateArticle} to='/column/shop/update'>{item.title}</Link></td>
+                  <td><Link data-aid={item.id} onClick={updateShop} to='/shop/update'>{item.title}</Link></td>
                   <td>{new Date(parseInt(item.pubdate) * 1000).toLocaleString()}</td>
-                  <td>{item.click}</td>
-                  <td>{item.writer}</td>
                   <td>
-                    <a data-aid={item.id} onClick={delArticle} href='javascript:void(0)'>删除</a>
-                    <Link data-aid={item.id} onClick={updateArticle} to='/column/shop/update'>更改</Link>
-                    <a href=''>浏览</a>
+                    <a data-aid={item.id} onClick={delShop} href='javascript:void(0)'>删除</a>
+                    <Link data-aid={item.id} onClick={updateShop} to='/shop/update'>更改</Link>
                   </td>
                 </tr>
               })
