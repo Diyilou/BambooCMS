@@ -1,7 +1,7 @@
 {
-  "name": "bilicms.com",
+  "name": "bamboo.com",
   "version": "1.0.0",
-  "description": "bfsaige",
+  "description": "bamboo",
   "main": "gulpfile.js",
   "dependencies": {
     "babel-preset-react": "^6.23.0",
@@ -29,7 +29,7 @@
     "url": "none"
   },
   "keywords": [
-    "bilicms"
+    "bamboo"
   ],
   "author": "mingxin.zhang",
   "license": "ISC"

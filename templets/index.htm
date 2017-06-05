@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>半本手帐馆</title>
+    <title>Bamboocms</title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <link rel="stylesheet" type="text/css" href="/public/css/normalize.css" />
@@ -11,44 +11,9 @@
     <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <aside class="s-index-aside">
-      <nav>
-        <ul>
-          <li><a href="/">半本</a></li>
-          <li><a href="/store/">胶带 Store</a></li>
-          <li><a href="/find/">发现</a></li>
-          <li><a href="/about/">我们</a></li>
-        </ul>
-      </nav>
-    </aside>
-    <section class="s-index-shop">
-      <div class="grid">
-        <?php
-          require_once(dirname(__file__) . '/../route/data.client.php');
-          $client = new Client();
-          $result = $client -> getIndexShop();
-          $result = $result['data'];
-          $html = "";
-          for ($i = 0, $len = count($result); $i < $len; $i++) {
-            $brand = $result[$i]['brand'];
-            $title = $result[$i]['title'];
-            $litpic = $result[$i]['litpic'];
-            $aid = $result[$i]['id'];
-            $html .= "
-              <figure class='effect-milo'>
-                  <img src='$litpic'/>
-                  <figcaption>
-                      <h2>$brand</h2>
-                      <p>$title</p>
-                      <a title='$title' href='/store/".$aid.".html' target='_blank'>View more</a>
-                  </figcaption>
-              </figure>
-            ";
-          }
-          echo $html;
-        ?>
-      </div>
-    </section>
+    <?php
+      // 可以在这里写php代码，动态获取数据，view/view.php会自动解析成尾静态页面
+    ?>
     <script type="text/javascript" src="/public/js/lib/jquery-1.12.0.min.js"></script>
     <script type="text/javascript" src="/public/js/main.js"></script>
   </body>

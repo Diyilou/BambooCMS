@@ -1,14 +1,5 @@
 RewriteEngine on  RewriteCond % !^$
 
-RewriteRule ^(find)\/([0-9\_a-zA-Z]*).html$ /view/view.php?tag=$1&aid=$2
-RewriteRule ^(store)\/([0-9\_a-zA-Z]*).html$ /view/view.php?tag=$1&aid=$2
-
-RewriteRule ^(find[/]{0,1})$ /view/view.php?tag=$1
-RewriteRule ^(store[/]{0,1})$ /view/view.php?tag=$1
-
-RewriteRule ^(find[/])index.html$ /view/view.php?tag=$1
-RewriteRule ^(store[/])index.html$ /view/view.php?tag=$1
-
 RewriteRule ^([a-zA-Z]*)\.html /view/view.php?tag=$1
 
 ErrorDocument 404 /404.htm
