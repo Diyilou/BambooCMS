@@ -3,6 +3,6 @@
         'servername' => 'localhost',
         'username' => 'root',
         'password' => 'passgz6374',
-        'dbname' => 'shouzhangcom'
+        'dbname' => 'banbennotecom'
     );
 ?>
